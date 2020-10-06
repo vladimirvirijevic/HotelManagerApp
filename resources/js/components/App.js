@@ -1,19 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, BrowserRouter } from "react-router-dom";
-import Test from "./Test";
-import "../../css/App.css";
-import { Button } from "antd";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
+import Login from "./Auth/Login";
+import Register from "./Auth/Register";
 
-function App() {
-    return (
-        <div className="container">
-            <h1>App</h1>
-            <Button type="primary">Button</Button>
-            <Route path="/test" component={Test} />
-        </div>
+const App = props => {
+    let routes = (
+        <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+        </Switch>
     );
-}
+
+    return <div className="container">{routes}</div>;
+};
 
 export default App;
 

@@ -2,7 +2,51 @@
 // @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // // Variables
-// @import 'variables';
+@import "variables";
 
 // // Bootstrap
-// @import '~bootstrap/scss/bootstrap';
+// @import "~bootstrap/scss/bootstrap";
+@import "../../node_modules/antd/dist/antd.css";
+html,
+body {
+    background-color: #fff;
+    color: #353535;
+    font-family: "Nunito", sans-serif !important;
+}
+// AUTH
+.auth {
+    padding-top: 100px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__subtitle {
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    &__form {
+        padding: 30px;
+        box-shadow: $box-shadow;
+    }
+
+    &__bottom-text {
+        margin-top: 15px;
+    }
+
+    &__link {
+        margin-left: 10px;
+    }
+}
+
+// END AUTH
+
+// SHARED
+.input-icon {
+    margin-right: 10px;
+}
+// END SHARED
