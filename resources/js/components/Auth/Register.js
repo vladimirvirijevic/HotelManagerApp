@@ -1,20 +1,38 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Alert } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 
-const Register = () => {
+const Register = props => {
     const onFinish = values => {
-        console.log("Received values of form: ", values);
+        props.onRegister(values);
     };
+
+    let errorMessage = null;
+    if (props.error) {
+        errorMessage = (
+            <Alert
+                className="alert-message"
+                message={props.error}
+                type="error"
+                closable
+            />
+        );
+    }
+
+    let redirect = props.isAuth ? <Redirect to="/test" /> : null;
 
     return (
         <div className="auth">
+            {redirect}
             <Form className="auth__form" onFinish={onFinish}>
+                {errorMessage}
                 <h1 className="auth__title">Hotel Manager</h1>
                 <h4 className="auth__subtitle">Register</h4>
                 <Form.Item
-                    name="fullName"
+                    name="name"
                     hasFeedback
                     rules={[
                         {
@@ -116,8 +134,14 @@ const Register = () => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" block size="large">
-                        Log in
+                    <Button
+                        loading={props.loading}
+                        type="primary"
+                        htmlType="submit"
+                        block
+                        size="large"
+                    >
+                        Register
                     </Button>
                     <div className="auth__bottom-text">
                         Or
@@ -131,4 +155,18 @@ const Register = () => {
     );
 };
 
-export default Register;
+const mapStateToPros = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuth: state.auth.token !== null
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onRegister: registerInfo => dispatch(actions.register(registerInfo))
+    };
+};
+
+export default connect(mapStateToPros, mapDispatchToProps)(Register);
