@@ -17,6 +17,6 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'room'
 ], function ($router) {
-
+    Route::get('all', 'RoomController@index');
     Route::post('store', 'RoomController@store');
 });

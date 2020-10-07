@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Tabs } from "antd";
 import { AppleOutlined, AndroidOutlined } from "@ant-design/icons";
 import Rooms from "../../components/Rooms/Rooms";
@@ -8,6 +8,10 @@ import * as actions from "../../store/actions/index";
 const { TabPane } = Tabs;
 
 const Settings = props => {
+    useEffect(() => {
+        props.onGetRooms();
+    }, []);
+
     return (
         <div>
             <Tabs className="settings__tabs" defaultActiveKey="1">
@@ -20,7 +24,7 @@ const Settings = props => {
                     }
                     key="1"
                 >
-                    <Rooms addRoom={props.onAddRoom} />
+                    <Rooms rooms={props.rooms} addRoom={props.onAddRoom} />
                 </TabPane>
                 <TabPane
                     tab={
@@ -51,13 +55,15 @@ const Settings = props => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.settings.loading
+        loading: state.settings.loading,
+        rooms: state.settings.rooms
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddRoom: room => dispatch(actions.addRoom(room))
+        onAddRoom: room => dispatch(actions.addRoom(room)),
+        onGetRooms: () => dispatch(actions.getRooms())
     };
 };
 

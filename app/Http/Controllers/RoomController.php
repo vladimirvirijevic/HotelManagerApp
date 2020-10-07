@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Room;
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\Builder;
 
 class RoomController extends Controller
 {
@@ -24,8 +26,12 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $room = Room::all();
-        return response()->json(['message'=>'Success','data'=>$room],200);
+        $rooms = Room::whereHas('user', function (Builder $query) {
+            $user = Auth::user();
+            $query->where('hotel', 'like', $user->hotel);
+        })->get();
+
+        return response()->json(['message'=>'Success','rooms'=>$rooms],200);
     }
 
     /**
@@ -54,7 +60,7 @@ class RoomController extends Controller
 
     public function validateRoom(){
         return Validator::make(request()->all(), [
-            'name' => 'required|unique:rooms|string|min:3|max:255',
+            'name' => 'required|unique:rooms|string|max:100',
             'capacity' => 'required',
             'price' => 'required'
         ]);

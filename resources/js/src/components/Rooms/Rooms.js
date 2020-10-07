@@ -1,6 +1,22 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Input, InputNumber } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { Table } from "antd";
+
+const columns = [
+    {
+        title: "Name",
+        dataIndex: "name"
+    },
+    {
+        title: "Capacity",
+        dataIndex: "capacity"
+    },
+    {
+        title: "Price",
+        dataIndex: "price"
+    }
+];
 
 const Rooms = props => {
     const [visible, setVisible] = useState(false);
@@ -16,12 +32,21 @@ const Rooms = props => {
     return (
         <div>
             <Button
+                className="settings__add-button"
                 icon={<PlusOutlined />}
                 type="primary"
                 onClick={() => setVisible(true)}
             >
                 Add Room
             </Button>
+
+            <Table
+                pagination={{ pageSize: 6 }}
+                columns={columns}
+                dataSource={props.rooms}
+                rowKey="name"
+            />
+
             <Modal
                 title="Add Room"
                 visible={visible}

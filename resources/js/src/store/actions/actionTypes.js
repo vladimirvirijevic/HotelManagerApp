@@ -10,3 +10,7 @@ export const LOGOUT = "LOGOUT";
 export const ADD_ROOM_START = "ADD_ROOM_START";
 export const ADD_ROOM_SUCCESS = "ADD_ROOM_SUCCESS";
 export const ADD_ROOM_FAIL = "ADD_ROOM_FAIL";
+
+export const GET_ROOMS_SUCCESS = "GET_ROOMS_SUCCESS";
+export const GET_ROOMS_FAIL = "GET_ROOMS_FAIL";
+export const GET_ROOMS_START = "GET_ROOMS_START";

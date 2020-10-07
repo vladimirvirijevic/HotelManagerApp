@@ -27,7 +27,7 @@ export const addRoom = room => {
         axios
             .post("room/store", room)
             .then(response => {
-                console.log(response);
+                console.log(response.data);
                 dispatch(addRoomSuccess(response.data));
             })
             .catch(e => {
@@ -36,6 +36,39 @@ export const addRoom = room => {
                     errorMessage = e.response.data.message.name[0];
                 }
                 dispatch(addRoomFail(errorMessage));
+            });
+    };
+};
+
+export const getRoomsStart = () => {
+    return {
+        type: actionTypes.GET_ROOMS_START
+    };
+};
+
+export const getRoomsSuccess = rooms => {
+    return {
+        type: actionTypes.GET_ROOMS_SUCCESS,
+        rooms: rooms
+    };
+};
+
+export const getRoomsFail = error => {
+    return {
+        type: actionTypes.GET_ROOMS_SUCCESS,
+        error: error
+    };
+};
+
+export const getRooms = () => {
+    return dispatch => {
+        axios
+            .get("room/all")
+            .then(response => {
+                dispatch(getRoomsSuccess(response.data.rooms));
+            })
+            .catch(error => {
+                dispatch(getRoomsFail(error));
             });
     };
 };
