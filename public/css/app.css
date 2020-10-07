@@ -30919,6 +30919,11 @@ div.ant-typography-edit-content.ant-typography-rtl {
   min-height: 100vh;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .auth-wrapper {
   padding-top: 100px;
   background: url(/images/bg2.jpg?a9d7ab66f934f37de1368a3b149c6e11) no-repeat center center fixed;
@@ -30967,6 +30972,35 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin: 15px 0;
 }
 
+.drawer-text {
+  margin: 0;
+  padding: 0;
+}
+
+.side-drawer {
+  height: 100%;
+  background: #4e4ea6;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  z-index: 200;
+  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
+  color: #fff;
+}
+
+@media only screen and (min-width: 600px) {
+  .side-drawer {
+    display: none;
+  }
+}
+
+.side-drawer.open {
+  transform: translateX(0);
+}
+
 .sidenav {
   height: 100%;
   width: 240px;
@@ -30989,6 +31023,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
 }
 
 .sidenav__items {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -31004,13 +31039,54 @@ div.ant-typography-edit-content.ant-typography-rtl {
   transition: 0.2s;
 }
 
+.sidenav__item__text {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .sidenav__item__text {
+    display: none;
+  }
+}
+
 .sidenav__item:hover {
   color: #4e4ea6;
   background-color: #f0f2f8;
 }
 
+@media only screen and (max-width: 1000px) {
+  .sidenav__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+  }
+}
+
 .sidenav__icon {
   margin-right: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .sidenav__icon {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .sidenav {
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .sidenav {
+    display: none;
+  }
 }
 
 .active-link {
@@ -31029,11 +31105,42 @@ div.ant-typography-edit-content.ant-typography-rtl {
   width: 100%;
   background: #fff;
   box-shadow: 0px 0px 21px 1px #e6e3e3;
-  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 35px;
+}
+
+.content__topbar h2 {
+  color: #4e4ea6;
+  margin: 0;
+  font-weight: bold;
+}
+
+.content__topbar__drawer {
+  margin-right: 15px;
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .content__topbar__drawer {
+    display: inline-block;
+  }
 }
 
 .content__main {
   padding: 20px 40px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .content {
+    margin-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .content {
+    margin-left: 0px;
+  }
 }
 
 .settings__add-button {

@@ -13,6 +13,11 @@ body {
     line-height: 1.6;
     min-height: 100vh;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+}
 // AUTH
 
 .auth-wrapper {
@@ -71,6 +76,31 @@ body {
 // END SHARED
 
 // LAYOUT
+.drawer-text {
+    margin: 0;
+    padding: 0;
+}
+.side-drawer {
+    height: 100%;
+    background: $primary;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    z-index: 200;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    color: #fff;
+
+    @media only screen and (min-width: 600px) {
+        display: none;
+    }
+}
+.side-drawer.open {
+    transform: translateX(0);
+}
+
 .sidenav {
     height: 100%;
     width: 240px;
@@ -93,6 +123,7 @@ body {
     }
 
     &__items {
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         padding: 20px;
@@ -107,14 +138,43 @@ body {
         margin: 5px 0;
         transition: 0.2s;
 
+        &__text {
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            @media only screen and (max-width: 1000px) {
+                display: none;
+            }
+        }
+
         &:hover {
             color: $primary;
             background-color: $grey;
+        }
+
+        @media only screen and (max-width: 1000px) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
         }
     }
 
     &__icon {
         margin-right: 10px;
+        @media only screen and (max-width: 1000px) {
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 1000px) {
+        width: 100px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        display: none;
     }
 }
 
@@ -133,11 +193,36 @@ body {
         width: 100%;
         background: #fff;
         box-shadow: $box-shadow-light;
-        padding: 0px 10px;
+        display: flex;
+        align-items: center;
+        padding: 0 0 0 35px;
+
+        h2 {
+            color: $primary;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        &__drawer {
+            margin-right: 15px;
+            display: none;
+
+            @media only screen and (max-width: 600px) {
+                display: inline-block;
+            }
+        }
     }
 
     &__main {
         padding: 20px 40px;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        margin-left: 100px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        margin-left: 0px;
     }
 }
 
