@@ -9,7 +9,7 @@ const Layout = props => {
                 <div className="sidenav__items">
                     <NavLink
                         className="sidenav__item"
-                        to="/"
+                        to="/bookings"
                         exact
                         activeClassName="active-link"
                     >

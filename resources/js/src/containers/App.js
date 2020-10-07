@@ -7,7 +7,7 @@ import Layout from "../components/UI/Layout";
 import GuardedRoute from "../components/Shared/GuardedRoute";
 import * as actions from "../store/actions/index";
 import Bookings from "./Bookings";
-import Settings from "./Settings";
+import Settings from "./Settings/Settings";
 import Logout from "./Auth/Logout";
 
 const App = props => {

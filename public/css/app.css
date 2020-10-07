@@ -30955,6 +30955,10 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin-left: 10px;
 }
 
+.input-number {
+  width: 100%;
+}
+
 .input-icon {
   margin-right: 10px;
 }
@@ -31029,6 +31033,6 @@ div.ant-typography-edit-content.ant-typography-rtl {
 }
 
 .content__main {
-  padding: 0px 10px;
+  padding: 20px 40px;
 }
 

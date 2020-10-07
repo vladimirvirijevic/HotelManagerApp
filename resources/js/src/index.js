@@ -5,12 +5,16 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import authReducer from "./store/reducers/auth";
+import settingsReducer from "./store/reducers/settings";
 import App from "./containers/App";
-// Redux store
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const rootReducer = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    settings: settingsReducer
 });
+
 const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(thunk))
