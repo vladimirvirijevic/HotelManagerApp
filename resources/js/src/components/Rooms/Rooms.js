@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Input, InputNumber } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { connect } from "react-redux";
-import * as actions from "../../../store/actions/index";
 
 const Rooms = props => {
     const [visible, setVisible] = useState(false);
 
     const handleSubmit = values => {
-        props.onAddRoom(values);
+        props.addRoom(values);
     };
 
     // const handleCancel = () => {
@@ -99,16 +97,4 @@ const Rooms = props => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        loading: state.settings.loading
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onAddRoom: room => dispatch(actions.addRoom(room))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Rooms);
+export default Rooms;

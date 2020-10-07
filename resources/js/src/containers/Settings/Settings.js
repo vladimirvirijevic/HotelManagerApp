@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Tabs } from "antd";
 import { AppleOutlined, AndroidOutlined } from "@ant-design/icons";
-import Rooms from "./Rooms/Rooms";
+import Rooms from "../../components/Rooms/Rooms";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 
 const { TabPane } = Tabs;
 
-const Settings = () => {
+const Settings = props => {
     return (
         <div>
             <Tabs className="settings__tabs" defaultActiveKey="1">
@@ -18,7 +20,7 @@ const Settings = () => {
                     }
                     key="1"
                 >
-                    <Rooms />
+                    <Rooms addRoom={props.onAddRoom} />
                 </TabPane>
                 <TabPane
                     tab={
@@ -47,4 +49,16 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+const mapStateToProps = state => {
+    return {
+        loading: state.settings.loading
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddRoom: room => dispatch(actions.addRoom(room))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
