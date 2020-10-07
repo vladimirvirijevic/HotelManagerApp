@@ -32,6 +32,7 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        //test
 
         return $this->respondWithToken($token);
     }
@@ -41,13 +42,14 @@ class AuthController extends Controller
         if (User::where('email', '=', request('email'))->count() > 0) {
             return Response::json([
                 'error' => "User already exists."
-            ], 409); 
+            ], 409);
         }
 
         User::create([
             'name' => request('name'),
             'email' => request('email'),
-            'password' => Hash::make(request('password'))
+            'password' => Hash::make(request('password')),
+            'hotel' => request('hotel')
         ]);
 
         return $this->login(request());

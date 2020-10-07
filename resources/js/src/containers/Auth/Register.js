@@ -1,6 +1,11 @@
 import React from "react";
 import { Form, Input, Button, Alert } from "antd";
-import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import {
+    UserOutlined,
+    LockOutlined,
+    MailOutlined,
+    HomeOutlined
+} from "@ant-design/icons";
 import { NavLink, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
@@ -49,6 +54,26 @@ const Register = props => {
                         <Input
                             prefix={<UserOutlined className="input-icon" />}
                             placeholder="Full Name"
+                            size="large"
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="hotel"
+                        hasFeedback
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please enter hotel name!"
+                            },
+                            {
+                                max: 100,
+                                message: "Maximum of 100 characters."
+                            }
+                        ]}
+                    >
+                        <Input
+                            prefix={<HomeOutlined className="input-icon" />}
+                            placeholder="Hotel Name"
                             size="large"
                         />
                     </Form.Item>
