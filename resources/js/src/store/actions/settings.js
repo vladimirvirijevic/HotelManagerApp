@@ -9,7 +9,7 @@ export const addRoomStart = () => {
 
 export const addRoomSuccess = room => {
     return {
-        type: actionTypes.ADD_ROOM_START,
+        type: actionTypes.ADD_ROOM_SUCCESS,
         room: room
     };
 };
@@ -27,8 +27,7 @@ export const addRoom = room => {
         axios
             .post("room/store", room)
             .then(response => {
-                console.log(response.data);
-                dispatch(addRoomSuccess(response.data));
+                dispatch(addRoomSuccess(response.data.room));
             })
             .catch(e => {
                 let errorMessage = "There was an error!";

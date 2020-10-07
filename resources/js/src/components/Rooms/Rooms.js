@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Input, InputNumber } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { Table } from "antd";
+import { Table, Alert } from "antd";
 
 const columns = [
     {
@@ -53,6 +53,14 @@ const Rooms = props => {
                 footer={null}
                 onCancel={() => setVisible(false)}
             >
+                {props.error ? (
+                    <Alert
+                        className="alert-message"
+                        message={props.error}
+                        type="error"
+                        closable
+                    />
+                ) : null}
                 <Form onFinish={handleSubmit} layout="vertical">
                     <Form.Item
                         label="Room Name"

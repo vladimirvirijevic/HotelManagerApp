@@ -52,10 +52,10 @@ class RoomController extends Controller
         $room = new Room($validator->validate());
 
         if($user->rooms()->save($room)){
-            return response()->json(['message'=>'Room added','data'=>$room],200);
+            return response()->json(['message'=>'Room added','room'=>$room],200);
         }
 
-        return response()->json(['message'=>'Error Occured','data'=>null],400);
+        return response()->json(['message'=>'Error Occured','room'=>null],400);
     }
 
     public function validateRoom(){

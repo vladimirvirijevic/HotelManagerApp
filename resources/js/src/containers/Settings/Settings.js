@@ -24,7 +24,11 @@ const Settings = props => {
                     }
                     key="1"
                 >
-                    <Rooms rooms={props.rooms} addRoom={props.onAddRoom} />
+                    <Rooms
+                        error={props.roomError}
+                        rooms={props.rooms}
+                        addRoom={props.onAddRoom}
+                    />
                 </TabPane>
                 <TabPane
                     tab={
@@ -56,7 +60,8 @@ const Settings = props => {
 const mapStateToProps = state => {
     return {
         loading: state.settings.loading,
-        rooms: state.settings.rooms
+        rooms: state.settings.rooms,
+        roomError: state.settings.error
     };
 };
 
