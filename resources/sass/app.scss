@@ -7,18 +7,28 @@
 // // Bootstrap
 // @import "~bootstrap/scss/bootstrap";
 @import "../../node_modules/antd/dist/antd.css";
-html,
 body {
-    background-color: #fff;
-    color: #353535;
-    font-family: "Nunito", sans-serif !important;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 // AUTH
-.auth {
+
+.auth-wrapper {
     padding-top: 100px;
+    background: url("../assets/bg2.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100vh;
+}
+.auth {
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
+    background: #fff;
 
     &__title {
         font-weight: bold;
@@ -53,4 +63,78 @@ body {
 .alert-message {
     margin: 15px 0;
 }
+
 // END SHARED
+
+// LAYOUT
+.sidenav {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: $primary;
+    overflow-x: hidden;
+    padding-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    color: $grey;
+
+    &__title {
+        color: inherit;
+        text-align: center;
+        margin: 0px 0 20px 0;
+    }
+
+    &__items {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    &__item {
+        border-radius: 10px;
+        padding: 15px 0 15px 30px;
+        font-size: 15px;
+        color: inherit;
+        font-weight: 500;
+        margin: 5px 0;
+        transition: 0.2s;
+
+        &:hover {
+            color: $primary;
+            background-color: $grey;
+        }
+    }
+
+    &__icon {
+        margin-right: 10px;
+    }
+}
+
+.active-link {
+    color: $primary;
+    background-color: $grey;
+}
+
+.content {
+    min-height: 100vh;
+    margin-left: 240px;
+    background-color: $grey;
+
+    &__topbar {
+        height: 60px;
+        width: 100%;
+        background: #fff;
+        box-shadow: $box-shadow-light;
+        padding: 0px 10px;
+    }
+
+    &__main {
+        padding: 0px 10px;
+    }
+}
+
+// END LAYOUT

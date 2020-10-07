@@ -7,8 +7,11 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
+        <script src="https://kit.fontawesome.com/e54ced1164.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id="root"></div>
