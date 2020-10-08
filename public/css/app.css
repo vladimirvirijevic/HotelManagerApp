@@ -30960,6 +30960,10 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin-left: 10px;
 }
 
+.date-picker {
+  width: 100%;
+}
+
 .input-number {
   width: 100%;
 }

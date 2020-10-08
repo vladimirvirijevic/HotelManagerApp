@@ -8,6 +8,7 @@ import authReducer from "./store/reducers/auth";
 import roomsReducer from "./store/reducers/rooms";
 import clientsReducer from "./store/reducers/clients";
 import servicesReducer from "./store/reducers/services";
+import bookingsReducer from "./store/reducers/bookings";
 import App from "./containers/App";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     rooms: roomsReducer,
     clients: clientsReducer,
-    services: servicesReducer
+    services: servicesReducer,
+    bookings: bookingsReducer
 });
 
 const store = createStore(

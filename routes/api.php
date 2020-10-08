@@ -36,3 +36,11 @@ Route::group([
     Route::get('all', 'ServiceController@index');
     Route::post('store', 'ServiceController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'booking'
+], function ($router) {
+    Route::get('all', 'BookingController@index');
+    Route::post('store', 'BookingController@store');
+});
