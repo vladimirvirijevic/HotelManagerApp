@@ -43,7 +43,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validateRoom();
+        $validator = $this->validateClient();
         if($validator->fails()){
             return response()->json(['message'=>$validator->messages(),'data'=>null],400);
         }
@@ -58,7 +58,7 @@ class ClientController extends Controller
         return response()->json(['message'=>'Error Occured','room'=>null],400);
     }
 
-    public function validateRoom(){
+    public function validateClient(){
         return Validator::make(request()->all(), [
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100',

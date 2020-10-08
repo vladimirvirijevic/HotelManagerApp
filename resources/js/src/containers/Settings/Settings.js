@@ -5,6 +5,7 @@ import Rooms from "../../components/Rooms";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Clients from "../../components/Clients";
+import Services from "../../components/Services";
 
 const { TabPane } = Tabs;
 
@@ -60,7 +61,11 @@ const Settings = props => {
                     }
                     key="3"
                 >
-                    Services
+                    <Services
+                        error={null}
+                        services={props.services}
+                        addService={props.onAddService}
+                    />
                 </TabPane>
             </Tabs>
         </div>
@@ -72,7 +77,8 @@ const mapStateToProps = state => {
         loading: state.rooms.loading,
         rooms: state.rooms.rooms,
         roomError: state.rooms.error,
-        clients: state.clients.clients
+        clients: state.clients.clients,
+        services: state.services.services
     };
 };
 
@@ -81,7 +87,8 @@ const mapDispatchToProps = dispatch => {
         onAddRoom: room => dispatch(actions.addRoom(room)),
         onGetRooms: () => dispatch(actions.getRooms()),
         onAddClient: client => dispatch(actions.addClient(client)),
-        onGetClients: () => dispatch(actions.getClients())
+        onGetClients: () => dispatch(actions.getClients()),
+        onAddService: service => dispatch(actions.addService(service))
     };
 };
 

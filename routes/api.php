@@ -28,3 +28,11 @@ Route::group([
     Route::get('all', 'ClientController@index');
     Route::post('store', 'ClientController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'service'
+], function ($router) {
+    Route::get('all', 'ServiceController@index');
+    Route::post('store', 'ServiceController@store');
+});
