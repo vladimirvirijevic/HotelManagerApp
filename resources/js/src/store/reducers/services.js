@@ -21,7 +21,24 @@ const reducer = (state = initialState, action) => {
                 services: state.services.concat(action.service)
             };
         case actionTypes.ADD_SERVICE_FAIL:
-            console.log(action.error);
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
+        case actionTypes.GET_SERVICES_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.GET_SERVICES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                services: action.services
+            };
+        case actionTypes.GET_SERVICES_FAIL:
             return {
                 ...state,
                 loading: false,

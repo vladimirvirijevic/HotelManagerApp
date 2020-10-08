@@ -10,7 +10,7 @@ const columns = [
     },
     {
         title: "Price",
-        dataIndex: "phone"
+        dataIndex: "price"
     }
 ];
 

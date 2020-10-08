@@ -13,6 +13,7 @@ const Settings = props => {
     useEffect(() => {
         props.onGetRooms();
         props.onGetClients();
+        props.onGetServices();
     }, []);
 
     const addClient = client => {
@@ -62,7 +63,7 @@ const Settings = props => {
                     key="3"
                 >
                     <Services
-                        error={null}
+                        error={props.serviceError}
                         services={props.services}
                         addService={props.onAddService}
                     />
@@ -78,7 +79,8 @@ const mapStateToProps = state => {
         rooms: state.rooms.rooms,
         roomError: state.rooms.error,
         clients: state.clients.clients,
-        services: state.services.services
+        services: state.services.services,
+        serviceError: state.services.error
     };
 };
 
@@ -88,7 +90,8 @@ const mapDispatchToProps = dispatch => {
         onGetRooms: () => dispatch(actions.getRooms()),
         onAddClient: client => dispatch(actions.addClient(client)),
         onGetClients: () => dispatch(actions.getClients()),
-        onAddService: service => dispatch(actions.addService(service))
+        onAddService: service => dispatch(actions.addService(service)),
+        onGetServices: () => dispatch(actions.getServices())
     };
 };
 
