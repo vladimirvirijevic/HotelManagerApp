@@ -7,10 +7,10 @@ export const addClientStart = () => {
     };
 };
 
-export const addClientSuccess = room => {
+export const addClientSuccess = client => {
     return {
         type: actionTypes.ADD_CLIENT_SUCCESS,
-        room: room
+        client: client
     };
 };
 
@@ -33,6 +33,40 @@ export const addClient = client => {
                 console.log(e);
                 let errorMessage = "There was an error!";
                 dispatch(addClientFail(errorMessage));
+            });
+    };
+};
+
+export const getClientsStart = () => {
+    return {
+        type: actionTypes.GET_CLIENTS_START
+    };
+};
+
+export const getClientsSuccess = clients => {
+    return {
+        type: actionTypes.GET_CLIENTS_SUCCESS,
+        clients: clients
+    };
+};
+
+export const getClientsFail = error => {
+    return {
+        type: actionTypes.GET_CLIENTS_SUCCESS,
+        error: error
+    };
+};
+
+export const getClients = () => {
+    return dispatch => {
+        dispatch(getClientsStart());
+        axios
+            .get("client/all")
+            .then(response => {
+                dispatch(getClientsSuccess(response.data.clients));
+            })
+            .catch(error => {
+                dispatch(getClientsFail(error));
             });
     };
 };

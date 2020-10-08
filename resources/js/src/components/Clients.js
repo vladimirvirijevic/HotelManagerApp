@@ -47,7 +47,7 @@ const Clients = props => {
             <Table
                 pagination={{ pageSize: 6 }}
                 columns={columns}
-                dataSource={props.rooms}
+                dataSource={props.clients}
                 rowKey="name"
             />
 

@@ -11,6 +11,7 @@ const { TabPane } = Tabs;
 const Settings = props => {
     useEffect(() => {
         props.onGetRooms();
+        props.onGetClients();
     }, []);
 
     const addClient = client => {
@@ -46,7 +47,7 @@ const Settings = props => {
                 >
                     <Clients
                         error={null}
-                        clients={[]}
+                        clients={props.clients}
                         addClient={props.onAddClient}
                     />
                 </TabPane>
@@ -70,7 +71,8 @@ const mapStateToProps = state => {
     return {
         loading: state.rooms.loading,
         rooms: state.rooms.rooms,
-        roomError: state.rooms.error
+        roomError: state.rooms.error,
+        clients: state.clients.clients
     };
 };
 
@@ -78,7 +80,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onAddRoom: room => dispatch(actions.addRoom(room)),
         onGetRooms: () => dispatch(actions.getRooms()),
-        onAddClient: client => dispatch(actions.addClient(client))
+        onAddClient: client => dispatch(actions.addClient(client)),
+        onGetClients: () => dispatch(actions.getClients())
     };
 };
 

@@ -27,6 +27,24 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.error
             };
+        case actionTypes.GET_CLIENTS_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.GET_CLIENTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                clients: action.clients
+            };
+        case actionTypes.GET_CLIENTS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
         default:
             return state;
     }
