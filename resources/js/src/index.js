@@ -6,13 +6,15 @@ import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import authReducer from "./store/reducers/auth";
 import roomsReducer from "./store/reducers/rooms";
+import clientsReducer from "./store/reducers/clients";
 import App from "./containers/App";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    rooms: roomsReducer
+    rooms: roomsReducer,
+    clients: clientsReducer
 });
 
 const store = createStore(

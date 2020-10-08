@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { Tabs } from "antd";
 import { AppleOutlined, AndroidOutlined } from "@ant-design/icons";
-import Rooms from "../../components/Rooms/Rooms";
+import Rooms from "../../components/Rooms";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import Clients from "../../components/Clients";
 
 const { TabPane } = Tabs;
 
@@ -11,6 +12,10 @@ const Settings = props => {
     useEffect(() => {
         props.onGetRooms();
     }, []);
+
+    const addClient = client => {
+        console.log(client);
+    };
 
     return (
         <div>
@@ -39,7 +44,11 @@ const Settings = props => {
                     }
                     key="2"
                 >
-                    Clients
+                    <Clients
+                        error={null}
+                        clients={[]}
+                        addClient={props.onAddClient}
+                    />
                 </TabPane>
                 <TabPane
                     tab={
@@ -68,7 +77,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAddRoom: room => dispatch(actions.addRoom(room)),
-        onGetRooms: () => dispatch(actions.getRooms())
+        onGetRooms: () => dispatch(actions.getRooms()),
+        onAddClient: client => dispatch(actions.addClient(client))
     };
 };
 

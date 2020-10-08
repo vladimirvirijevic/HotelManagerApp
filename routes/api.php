@@ -20,3 +20,11 @@ Route::group([
     Route::get('all', 'RoomController@index');
     Route::post('store', 'RoomController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'client'
+], function ($router) {
+    Route::get('all', 'ClientController@index');
+    Route::post('store', 'ClientController@store');
+});
