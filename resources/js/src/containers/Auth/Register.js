@@ -27,7 +27,7 @@ const Register = props => {
         );
     }
 
-    let redirect = props.isAuth ? <Redirect to="/test" /> : null;
+    let redirect = props.isAuth ? <Redirect to="/bookings" /> : null;
 
     return (
         <div className="auth-wrapper">

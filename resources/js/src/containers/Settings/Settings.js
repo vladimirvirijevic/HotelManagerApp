@@ -59,9 +59,9 @@ const Settings = props => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.settings.loading,
-        rooms: state.settings.rooms,
-        roomError: state.settings.error
+        loading: state.rooms.loading,
+        rooms: state.rooms.rooms,
+        roomError: state.rooms.error
     };
 };
 

@@ -1,2 +1,2 @@
 export { register, login, authCheckState, logout } from "./auth";
-export { addRoom, getRooms } from "./settings";
+export { addRoom, getRooms } from "./rooms";

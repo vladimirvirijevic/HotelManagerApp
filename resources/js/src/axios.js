@@ -4,7 +4,7 @@ import axios from "axios";
 // };
 
 const instance = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: "http://app.hotel1pro.com/api",
     headers: {
         "Content-Type": "application/json"
     }

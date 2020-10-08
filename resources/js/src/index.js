@@ -5,14 +5,14 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import authReducer from "./store/reducers/auth";
-import settingsReducer from "./store/reducers/settings";
+import roomsReducer from "./store/reducers/rooms";
 import App from "./containers/App";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    settings: settingsReducer
+    rooms: roomsReducer
 });
 
 const store = createStore(
