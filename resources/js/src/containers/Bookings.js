@@ -44,6 +44,7 @@ const Bookings = props => {
                         key="1"
                     >
                         <AddBooking
+                            error={props.bookingError}
                             rooms={props.rooms}
                             clients={props.clients}
                             addBooking={onAddBooking}
@@ -60,6 +61,7 @@ const Bookings = props => {
                         key="2"
                     >
                         <AddBooking
+                            error={props.bookingError}
                             rooms={props.rooms}
                             clients={props.clients}
                             addBooking={onAddBooking}
@@ -76,7 +78,8 @@ const mapStateToProps = state => {
     return {
         rooms: state.rooms.rooms,
         clients: state.clients.clients,
-        bookings: state.bookings.bookings
+        bookings: state.bookings.bookings,
+        bookingError: state.bookings.error
     };
 };
 

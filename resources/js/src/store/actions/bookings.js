@@ -27,12 +27,12 @@ export const addBooking = booking => {
         axios
             .post("booking/store", booking)
             .then(response => {
+                console.log(response);
                 dispatch(addBookingSuccess(response.data.booking));
             })
             .catch(e => {
-                console.log(e);
-                let errorMessage = "There was an error!";
-                dispatch(addBookingFail(errorMessage));
+                console.log(e.response.data.message);
+                dispatch(addBookingFail(e.response.data.message));
             });
     };
 };

@@ -6,6 +6,7 @@ use App\Booking;
 use App\Room;
 use App\Client;
 
+use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\Builder;
+use SebastianBergmann\Comparator\Book;
 
 class BookingController extends Controller
 {
@@ -63,6 +65,11 @@ class BookingController extends Controller
         $end = strtotime($request->endDate);
         $days = ($end - $start) / (60 * 60 * 24) + 1;
 
+        // Check if room is booked
+        if ($this->canBookRoom($request->room, $request->startDate, $request->endDate) == false) {
+            return response()->json(['message'=>'Room is booked during that period','booking'=>null],400);
+        }
+
         $booking = new Booking($validator->validate());
 
         if ($request->note == null) {
@@ -83,7 +90,7 @@ class BookingController extends Controller
             return response()->json(['message'=>'Booking added','booking'=>$booking],200);
         }
 
-        return response()->json(['message'=>'Error Occured','room'=>null],400);
+        return response()->json(['message'=>'Error Occured','booking'=>null],400);
     }
 
     public function validateBooking() {
@@ -92,5 +99,19 @@ class BookingController extends Controller
             'endDate' => 'required|string|max:100',
             'status' => 'required'
         ]);
+    }
+
+    public function canBookRoom($roomId, $startDate, $endDate) {
+        $bookingsToCheck = Booking::where('room_id', $roomId)->get();
+        $datesToBook = CarbonPeriod::create($startDate, $endDate)->toArray();;
+
+        foreach ($bookingsToCheck as $bookingToCheck) {
+            $bookedDates = CarbonPeriod::create($bookingToCheck->startDate, $bookingToCheck->endDate)->toArray();;
+            if (count(array_intersect($datesToBook, $bookedDates)) > 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
