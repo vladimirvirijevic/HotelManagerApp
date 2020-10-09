@@ -4,13 +4,17 @@ import { CalendarOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import BookingCalendar from "../components/Bookings/BookingCalendar";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/index";
+import AddBooking from "../components/Bookings/AddBooking";
+import BookingsList from "../components/Bookings/BookingsList";
 
 const { TabPane } = Tabs;
 
 const Bookings = props => {
     useEffect(() => {
+        props.onGetBookings();
         props.onGetRooms();
         props.onGetClients();
+        
     }, []);
 
     const onAddBooking = bookingInfo => {
@@ -19,7 +23,8 @@ const Bookings = props => {
             endDate: bookingInfo.dates[1].format("DD-MM-YYYY"),
             status: bookingInfo.status,
             client: bookingInfo.client,
-            room: bookingInfo.room
+            room: bookingInfo.room,
+            note: bookingInfo.note
         };
 
         props.onAddBooking(booking);
@@ -38,11 +43,12 @@ const Bookings = props => {
                         }
                         key="1"
                     >
-                        <BookingCalendar
+                        <AddBooking
                             rooms={props.rooms}
                             clients={props.clients}
                             addBooking={onAddBooking}
                         />
+                        <BookingCalendar />
                     </TabPane>
                     <TabPane
                         tab={
@@ -53,7 +59,12 @@ const Bookings = props => {
                         }
                         key="2"
                     >
-                        Bookings
+                        <AddBooking
+                            rooms={props.rooms}
+                            clients={props.clients}
+                            addBooking={onAddBooking}
+                        />
+                        <BookingsList bookings={props.bookings} />
                     </TabPane>
                 </Tabs>
             </div>
@@ -64,7 +75,8 @@ const Bookings = props => {
 const mapStateToProps = state => {
     return {
         rooms: state.rooms.rooms,
-        clients: state.clients.clients
+        clients: state.clients.clients,
+        bookings: state.bookings.bookings
     };
 };
 
@@ -72,7 +84,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetRooms: () => dispatch(actions.getRooms()),
         onGetClients: () => dispatch(actions.getClients()),
-        onAddBooking: bookings => dispatch(actions.addBooking(bookings))
+        onAddBooking: bookings => dispatch(actions.addBooking(bookings)),
+        onGetBookings: () => dispatch(actions.getBookings())
     };
 };
 

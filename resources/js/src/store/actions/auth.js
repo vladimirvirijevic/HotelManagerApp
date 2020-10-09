@@ -54,7 +54,7 @@ export const register = registerInfo => {
                 );
                 localStorage.setItem("token", response.data.access_token);
                 localStorage.setItem("expirationDate", expirationDate);
-                localStorage.setItem("userData", response.data);
+                localStorage.setItem("userData", JSON.stringify(response.data));
                 dispatch(loginSuccess(response.data));
                 dispatch(checkOutTimeout(response.data.expires_in));
             })

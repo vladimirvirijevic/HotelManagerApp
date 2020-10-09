@@ -30926,7 +30926,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
 
 .auth-wrapper {
   padding-top: 100px;
-  background: url(/images/bg2.jpg?a9d7ab66f934f37de1368a3b149c6e11) no-repeat center center fixed;
+  background: url(./asset("images/bg2.jpg")) no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
 }

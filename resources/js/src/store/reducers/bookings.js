@@ -27,6 +27,24 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.error
             };
+        case actionTypes.GET_BOOKINGS_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.GET_BOOKINGS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                bookings: action.bookings
+            };
+        case actionTypes.GET_BOOKINGS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
         default:
             return state;
     }

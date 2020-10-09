@@ -10,7 +10,7 @@ export const addBookingStart = () => {
 export const addBookingSuccess = booking => {
     return {
         type: actionTypes.ADD_BOOKING_SUCCESS,
-        client: booking
+        booking: booking
     };
 };
 
@@ -33,6 +33,42 @@ export const addBooking = booking => {
                 console.log(e);
                 let errorMessage = "There was an error!";
                 dispatch(addBookingFail(errorMessage));
+            });
+    };
+};
+
+export const getBookingsStart = () => {
+    return {
+        type: actionTypes.GET_BOOKINGS_START
+    };
+};
+
+export const getBookingsSuccess = bookings => {
+    return {
+        type: actionTypes.GET_BOOKINGS_SUCCESS,
+        bookings: bookings
+    };
+};
+
+export const getBookingsFail = error => {
+    return {
+        type: actionTypes.GET_BOOKINGS_FAIL,
+        error: error
+    };
+};
+
+export const getBookings = () => {
+    return dispatch => {
+        dispatch(getBookingsStart());
+        axios
+            .get("booking/all")
+            .then(response => {
+                console.log(response.data);
+                dispatch(getBookingsSuccess(response.data.bookings));
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch(getBookingsFail(error));
             });
     };
 };

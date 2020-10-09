@@ -8,6 +8,7 @@ import authReducer from "./src/store/reducers/auth";
 import roomsReducer from "./src/store/reducers/rooms";
 import clientsReducer from "./src/store/reducers/clients";
 import servicesReducer from "./src/store/reducers/services";
+import bookingsReducer from "./src/store/reducers/bookings";
 import App from "./src/containers/App";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     rooms: roomsReducer,
     clients: clientsReducer,
-    services: servicesReducer
+    services: servicesReducer,
+    bookings: bookingsReducer
 });
 
 const store = createStore(
@@ -26,7 +28,7 @@ const store = createStore(
 
 const app = (
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename="/hotelmanagerapp/public">
             <App />
         </BrowserRouter>
     </Provider>

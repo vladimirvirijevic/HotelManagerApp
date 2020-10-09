@@ -9,6 +9,7 @@ import {
     DatePicker
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import AddBooking from "./AddBooking";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -24,7 +25,7 @@ const BookingCalendar = props => {
 
     return (
         <div>
-            <Button
+            {/* <Button
                 className="settings__add-button"
                 icon={<PlusOutlined />}
                 type="primary"
@@ -150,7 +151,8 @@ const BookingCalendar = props => {
                         </Button>
                     </Form.Item>
                 </Form>
-            </Modal>
+            </Modal> */}
+            Booking Calendar
         </div>
     );
 };

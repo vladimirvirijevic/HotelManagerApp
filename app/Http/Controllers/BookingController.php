@@ -33,6 +33,11 @@ class BookingController extends Controller
             $query->where('hotel', 'like', $user->hotel);
         })->get();
 
+        foreach ($bookings as $booking) {
+            $booking->client = Client::find($booking->client_id);
+            $booking->room = Client::find($booking->room_id);
+        }
+
         return response()->json(['message'=>'Success','bookings'=>$bookings],200);
     }
 
@@ -59,6 +64,14 @@ class BookingController extends Controller
         $days = ($end - $start) / (60 * 60 * 24) + 1;
 
         $booking = new Booking($validator->validate());
+
+        if ($request->note == null) {
+            $booking->note = "";
+        }
+        else {
+            $booking->note = $request->note;
+        }
+
         $booking->price = $room->price * $days;
         $booking->room_id = $request->room;
         $booking->client_id = $request->client;
