@@ -44,3 +44,11 @@ Route::group([
     Route::get('all', 'BookingController@index');
     Route::post('store', 'BookingController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'department'
+], function ($router) {
+    Route::get('all', 'DepartmentController@index');
+    Route::post('store', 'DepartmentController@store');
+});

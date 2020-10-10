@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Clients from "../../components/Clients";
 import Services from "../../components/Services";
+import Departments from "../../components/Departments";
 
 const { TabPane } = Tabs;
 
@@ -16,8 +17,8 @@ const Settings = props => {
         props.onGetServices();
     }, []);
 
-    const addClient = client => {
-        console.log(client);
+    const addDepartment = department => {
+        console.log(department);
     };
 
     return (
@@ -68,6 +69,21 @@ const Settings = props => {
                         addService={props.onAddService}
                     />
                 </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <AndroidOutlined />
+                            Departments
+                        </span>
+                    }
+                    key="4"
+                >
+                    <Departments
+                        error={props.departmentError}
+                        departments={props.departments}
+                        addDepartment={props.onAddDepartment}
+                    />
+                </TabPane>
             </Tabs>
         </div>
     );
@@ -80,7 +96,9 @@ const mapStateToProps = state => {
         roomError: state.rooms.error,
         clients: state.clients.clients,
         services: state.services.services,
-        serviceError: state.services.error
+        serviceError: state.services.error,
+        departments: state.departments.departments,
+        departmentError: state.departments.error,
     };
 };
 
@@ -91,7 +109,8 @@ const mapDispatchToProps = dispatch => {
         onAddClient: client => dispatch(actions.addClient(client)),
         onGetClients: () => dispatch(actions.getClients()),
         onAddService: service => dispatch(actions.addService(service)),
-        onGetServices: () => dispatch(actions.getServices())
+        onGetServices: () => dispatch(actions.getServices()),
+        onAddDepartment: department => dispatch(actions.addDepartment(department)),
     };
 };
 
