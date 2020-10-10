@@ -15,11 +15,8 @@ const Settings = props => {
         props.onGetRooms();
         props.onGetClients();
         props.onGetServices();
+        props.onGetDepartments();
     }, []);
-
-    const addDepartment = department => {
-        console.log(department);
-    };
 
     return (
         <div>
@@ -111,6 +108,7 @@ const mapDispatchToProps = dispatch => {
         onAddService: service => dispatch(actions.addService(service)),
         onGetServices: () => dispatch(actions.getServices()),
         onAddDepartment: department => dispatch(actions.addDepartment(department)),
+        onGetDepartments: () => dispatch(actions.getDepartments())
     };
 };
 

@@ -36,3 +36,40 @@ export const addDepartment = department => {
     };
 };
 
+export const getDepartmentsStart = () => {
+    return {
+        type: actionTypes.GET_DEPARTMENTS_START
+    };
+};
+
+export const getDepartmentsSuccess = departments => {
+    return {
+        type: actionTypes.GET_DEPARTMENTS_SUCCESS,
+        departments: departments
+    };
+};
+
+export const getDepartmentsFail = error => {
+    return {
+        type: actionTypes.GET_DEPARTMENTS_FAIL,
+        error: error
+    };
+};
+
+export const getDepartments = () => {
+    return dispatch => {
+        dispatch(getDepartmentsStart());
+        axios
+            .get("department/all")
+            .then(response => {
+                console.log(response.data.departments);
+                dispatch(getDepartmentsSuccess(response.data.departments));
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch(getDepartmentsFail(error));
+            });
+    };
+};
+
+

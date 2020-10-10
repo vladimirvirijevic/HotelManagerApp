@@ -30,7 +30,6 @@ export const addClient = client => {
                 dispatch(addClientSuccess(response.data.client));
             })
             .catch(e => {
-                console.log(e);
                 let errorMessage = "There was an error!";
                 dispatch(addClientFail(errorMessage));
             });

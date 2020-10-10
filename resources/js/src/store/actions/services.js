@@ -62,11 +62,9 @@ export const getServices = () => {
         axios
             .get("service/all")
             .then(response => {
-                console.log(response.data.services);
                 dispatch(getServicesSuccess(response.data.services));
             })
             .catch(error => {
-                console.log(error);
                 dispatch(getServicesFail(error));
             });
     };

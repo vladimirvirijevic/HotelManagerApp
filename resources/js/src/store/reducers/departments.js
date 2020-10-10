@@ -26,6 +26,24 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.error
             };
+        case actionTypes.GET_DEPARTMENTS_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.GET_DEPARTMENTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                departments: action.departments
+            };
+        case actionTypes.GET_DEPARTMENTS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
         default:
             return state;
     }
