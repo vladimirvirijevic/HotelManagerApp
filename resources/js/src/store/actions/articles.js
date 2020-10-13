@@ -142,3 +142,41 @@ export const getUnits = () => {
 };
 
 
+// IMPORTED ARTICLE
+
+export const addImportedArticleStart = () => {
+    return {
+        type: actionTypes.ADD_IMPORTED_ARTICLE_START
+    };
+};
+
+export const addImportedArticleSuccess = importedArticle => {
+    return {
+        type: actionTypes.ADD_IMPORTED_ARTICLE_SUCCESS,
+        importedArticle: importedArticle
+    };
+};
+
+export const addImportedArticleFail = error => {
+    return {
+        type: actionTypes.ADD_IMPORTED_ARTICLE_FAIL,
+        error: error
+    };
+};
+
+export const addImportedArticle = importedArticle => {
+    console.log(importedArticle);
+    return dispatch => {
+        dispatch(addImportedArticleStart());
+        axios
+            .post("importedArticle/store", importedArticle)
+            .then(response => {
+                dispatch(addImportedArticleSuccess(response.data.importedArticle));
+            })
+            .catch(e => {
+                let errorMessage = "Imported Article already exists!";
+                dispatch(addImportedArticleFail(errorMessage));
+            });
+    };
+};
+

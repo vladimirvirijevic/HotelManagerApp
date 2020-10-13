@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     articles: [],
+    importedArticles: [],
     loading: false,
     error: null,
     units: [],
@@ -84,6 +85,25 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loadingUnits: false,
                 errorUnits: action.error
+            };
+        // IMPORTED ARTICLES
+        case actionTypes.ADD_IMPORTED_ARTICLE_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.ADD_IMPORTED_ARTICLE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                importedArticles: state.importedArticles.concat(action.importedArticle)
+            };
+        case actionTypes.ADD_IMPORTED_ARTICLE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
             };
         default:
             return state;

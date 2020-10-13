@@ -68,3 +68,11 @@ Route::group([
     Route::get('all', 'UnitController@index');
     Route::post('store', 'UnitController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'importedArticle'
+], function ($router) {
+    Route::get('all', 'ImportedArticleController@index');
+    Route::post('store', 'ImportedArticleController@store');
+});
