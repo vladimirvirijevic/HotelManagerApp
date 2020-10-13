@@ -4,4 +4,4 @@ export { addClient, getClients } from "./clients";
 export { addService, getServices } from "./services";
 export { addBooking, getBookings } from "./bookings";
 export { addDepartment, getDepartments } from "./departments";
-export { addArticle } from "./articles";
+export { addArticle, getArticles } from "./articles";

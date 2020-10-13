@@ -37,4 +37,38 @@ export const addArticle = article => {
     };
 };
 
+export const getArticlesStart = () => {
+    return {
+        type: actionTypes.GET_ARTICLES_START
+    };
+};
+
+export const getArticlesSuccess = articles => {
+    return {
+        type: actionTypes.GET_ARTICLES_SUCCESS,
+        articles: articles
+    };
+};
+
+export const getArticlesFail = error => {
+    return {
+        type: actionTypes.GET_ARTICLES_FAIL,
+        error: error
+    };
+};
+
+export const getArticles = () => {
+    return dispatch => {
+        dispatch(getArticlesStart());
+        axios
+            .get("article/all")
+            .then(response => {
+                dispatch(getArticlesSuccess(response.data.articles));
+            })
+            .catch(error => {
+                dispatch(getArticlesFail(error));
+            });
+    };
+};
+
 

@@ -28,6 +28,13 @@ const Articles = props => {
                 Add Article
             </Button>
 
+            <Table
+                pagination={{ pageSize: 6 }}
+                columns={columns}
+                dataSource={props.articles}
+                rowKey="name"
+            />
+
             <Modal
                 title="Add Article"
                 visible={visible}
