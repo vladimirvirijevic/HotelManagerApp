@@ -62,11 +62,9 @@ export const getDepartments = () => {
         axios
             .get("department/all")
             .then(response => {
-                console.log(response.data.departments);
                 dispatch(getDepartmentsSuccess(response.data.departments));
             })
             .catch(error => {
-                console.log(error);
                 dispatch(getDepartmentsFail(error));
             });
     };

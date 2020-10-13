@@ -27,11 +27,9 @@ export const addBooking = booking => {
         axios
             .post("booking/store", booking)
             .then(response => {
-                console.log(response);
                 dispatch(addBookingSuccess(response.data.booking));
             })
             .catch(e => {
-                console.log(e.response.data.message);
                 dispatch(addBookingFail(e.response.data.message));
             });
     };
@@ -63,11 +61,9 @@ export const getBookings = () => {
         axios
             .get("booking/all")
             .then(response => {
-                console.log(response.data);
                 dispatch(getBookingsSuccess(response.data.bookings));
             })
             .catch(error => {
-                console.log(error);
                 dispatch(getBookingsFail(error));
             });
     };

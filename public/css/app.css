@@ -30983,7 +30983,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
 
 .side-drawer {
   height: 100%;
-  background: #4e4ea6;
+  background: #5e5ec5;
   position: fixed;
   top: 0;
   right: 0;
@@ -31012,7 +31012,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #4e4ea6;
+  background-color: #5e5ec5;
   overflow-x: hidden;
   padding-top: 20px;
   display: flex;
@@ -31056,7 +31056,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
 }
 
 .sidenav__item:hover {
-  color: #4e4ea6;
+  color: #5e5ec5;
   background-color: #f0f2f8;
 }
 
@@ -31094,7 +31094,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
 }
 
 .active-link {
-  color: #4e4ea6;
+  color: #5e5ec5;
   background-color: #f0f2f8;
 }
 
@@ -31115,7 +31115,7 @@ div.ant-typography-edit-content.ant-typography-rtl {
 }
 
 .content__topbar h2 {
-  color: #4e4ea6;
+  color: #5e5ec5;
   margin: 0;
   font-weight: bold;
 }
@@ -31149,5 +31149,86 @@ div.ant-typography-edit-content.ant-typography-rtl {
 
 .settings__add-button {
   margin-bottom: 20px;
+}
+
+.calendar {
+  margin: 2rem 0;
+  font-size: 15px;
+  overflow-y: scroll;
+  overflow-x: visible;
+}
+
+.calendar-row {
+  display: flex;
+  justify-content: stretch;
+  border-bottom: 5px solid #f8f8f8;
+  border-top: 5px solid #f8f8f8;
+}
+
+.room-name {
+  width: 200px !important;
+  background-color: #f8f8f8;
+  color: #333;
+  border: none !important;
+  text-align: center;
+  padding: 1rem 0 !important;
+}
+
+.calendar-date-field {
+  background-color: #f8f8f8;
+  color: #333;
+  text-align: center;
+}
+
+.calendar-field {
+  border-bottom: 1px solid #e7e7e7;
+  border-right: 1px solid #e7e7e7;
+  text-align: center;
+  padding: 15px 0;
+  width: 75px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.field-is-booked {
+  background-color: #436843;
+}
+
+.field-is-booked-new {
+  border: none;
+  background-color: #f9dc5c;
+}
+
+.field-is-booked-confirmed {
+  border: none;
+  background-color: #0ad637;
+}
+
+.field-is-booked-checkedin {
+  border: none;
+  background-color: #470ad6;
+}
+
+.field-is-booked-checkedout {
+  border: none;
+  background-color: #d60a92;
+}
+
+.caledar-tooltip {
+  height: 100%;
+  padding: 15px 0;
+}
+
+.ant-btn-primary {
+  background-color: #5e5ec5;
+  border-color: #5e5ec5;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:visited,
+.ant-btn-primary:active,
+.ant-btn-primary:focus {
+  background-color: #464694 !important;
+  border-color: #464694 !important;
 }
 

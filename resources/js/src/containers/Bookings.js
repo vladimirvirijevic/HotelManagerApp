@@ -49,7 +49,7 @@ const Bookings = props => {
                             clients={props.clients}
                             addBooking={onAddBooking}
                         />
-                        <BookingCalendar />
+                        <BookingCalendar rooms={props.rooms} bookings={props.bookings} />
                     </TabPane>
                     <TabPane
                         tab={

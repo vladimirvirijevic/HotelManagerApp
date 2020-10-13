@@ -21,7 +21,6 @@ const reducer = (state = initialState, action) => {
                 bookings: state.bookings.concat(action.booking)
             };
         case actionTypes.ADD_BOOKING_FAIL:
-            console.log(action.error);
             return {
                 ...state,
                 loading: false,

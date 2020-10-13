@@ -65,11 +65,10 @@ const AddBooking = props => {
                         ]}
                     >
                         <Select placeholder="Select a status" allowClear>
+                            <Option value="NEW">New</Option>
                             <Option value="CONFIRMED">Confirmed</Option>
-                            <Option value="FINISHED">Finished</Option>
-                            <Option value="PENDING_CONFIRMATION">
-                                Pending Confirmation
-                            </Option>
+                            <Option value="CHECKEDIN">Checked In</Option>
+                            <Option value="CHECKEDOUT">Checked Out</Option>
                         </Select>
                     </Form.Item>
 

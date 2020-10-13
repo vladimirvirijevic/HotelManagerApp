@@ -44,11 +44,9 @@ export const authCheckState = () => {
 export const register = registerInfo => {
     return dispatch => {
         dispatch(registerStart(registerInfo));
-        console.log(registerInfo);
         axios
             .post("auth/register", registerInfo)
             .then(response => {
-                console.log(response);
                 const expirationDate = new Date(
                     new Date().getTime() + response.data.expires_in * 1000
                 );
@@ -59,7 +57,6 @@ export const register = registerInfo => {
                 dispatch(checkOutTimeout(response.data.expires_in));
             })
             .catch(e => {
-                console.log(e.response.data.error);
                 dispatch(registerFail(e.response.data.error));
             });
     };
@@ -89,7 +86,6 @@ export const logout = () => {
 };
 
 export const loginSuccess = data => {
-    console.log(data);
     return {
         type: actionTypes.LOGIN_SUCCESS,
         token: data.access_token
@@ -98,7 +94,6 @@ export const loginSuccess = data => {
 
 export const checkOutTimeout = expirationTime => {
     return dispatch => {
-        console.log(expirationTime);
         setTimeout(() => {
             dispatch(logout());
         }, expirationTime * 1000);
@@ -111,7 +106,6 @@ export const login = loginInfo => {
         axios
             .post("auth/login", loginInfo)
             .then(response => {
-                console.log(response);
                 const expirationDate = new Date(
                     new Date().getTime() + response.data.expires_in * 1000
                 );

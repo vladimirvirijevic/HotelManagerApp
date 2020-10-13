@@ -37,7 +37,7 @@ class BookingController extends Controller
 
         foreach ($bookings as $booking) {
             $booking->client = Client::find($booking->client_id);
-            $booking->room = Client::find($booking->room_id);
+            $booking->room = Room::find($booking->room_id);
         }
 
         return response()->json(['message'=>'Success','bookings'=>$bookings],200);
@@ -85,8 +85,10 @@ class BookingController extends Controller
 
         $client->bookings()->attach($request->client);
         $room->bookings()->attach($request->room);
-
+        
         if($user->bookings()->save($booking)){
+            $booking->client = $client;
+            $booking->room = $room;
             return response()->json(['message'=>'Booking added','booking'=>$booking],200);
         }
 

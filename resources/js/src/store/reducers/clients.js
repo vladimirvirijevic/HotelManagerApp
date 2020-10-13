@@ -21,7 +21,6 @@ const reducer = (state = initialState, action) => {
                 clients: state.clients.concat(action.client)
             };
         case actionTypes.ADD_CLIENT_FAIL:
-            console.log(action.error);
             return {
                 ...state,
                 loading: false,

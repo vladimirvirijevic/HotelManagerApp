@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
-    Modal,
-    Button,
-    Form,
-    Input,
-    InputNumber,
+    Tooltip,
     Select,
     DatePicker
 } from "antd";
@@ -17,142 +13,149 @@ const { RangePicker } = DatePicker;
 const dateFormat = "DD/MM/YYYY";
 
 const BookingCalendar = props => {
-    const [visible, setVisible] = useState(false);
 
-    const handleSubmit = values => {
-        props.addBooking(values);
-    };
+    useEffect(() => {
+        const now = new Date();
+        labelDays = getLabelDays(now);
+    }, []);
+
+    const getLabelDays = (startDay) => {
+        const DAY = 1000 * 60 * 60 * 24;
+        let dates = [];
+
+        // start Day is 6 days before (beforeDates) before real start date
+        startDay.setTime(startDay.getTime() - 6 * DAY);
+
+        for (let i = 0; i < 14; i++) {
+            startDay.setTime(startDay.getTime() + DAY);
+            const dateAsString = startDay.getDate() + '-' + (startDay.getMonth() + 1) + '-' + startDay.getFullYear();
+
+            dates.push(dateAsString);
+        }
+
+        return dates;
+    }
+
+    const isBooked = (room, day) => {
+        const roomBookings = props.bookings.filter(x => x.room.id == room.id);
+        const result = dateIsBooked(roomBookings, day);
+
+        let bookingType = "";
+
+        if (result == null) {
+            bookingType = '';
+        }
+        else if (result.status == "NEW") {
+            bookingType = 'field-is-booked-new b-' + result.id;
+        }
+        else if (result.status == "CONFIRMED") {
+            bookingType = 'field-is-booked-confirmed b-' + result.id;
+        }
+        else if (result.status == "CHECKEDIN") {
+            bookingType = 'field-is-booked-checkedin b-' + result.id;
+        }
+        else if (result.status == "CHECKEDOUT") {
+            bookingType = 'field-is-booked-checkedout b-' + result.id;
+        }
+        else {
+            bookingType = 'field-is-booked b-' + result.id;
+        }
+
+
+        return bookingType;
+    }
+
+    const dateIsBooked = (roomBookings, day) => {
+        day = day.split('-').reverse().join('-');
+        const fieldDate = new Date(day);
+        fieldDate.setHours(0,0,0,0);
+
+        for (let i = 0; i < roomBookings.length; i++) {
+            const startDate = new Date(roomBookings[i].startDate.split("-").reverse().join("-"));
+            const endDate = new Date(roomBookings[i].endDate.split("-").reverse().join("-"));
+
+            const bookedDates = getDates(startDate, endDate);
+
+            for (let j = 0; j < bookedDates.length; j++) {
+                if (bookedDates[j].getTime() === fieldDate.getTime()) {
+                    return roomBookings[i];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    const getDates = (startDate, stopDate) => {
+        const DAY = 1000 * 60 * 60 * 24;
+
+        var dateArray = new Array();
+        var currentDate = startDate;
+        while (currentDate <= stopDate) {
+            const date = new Date(currentDate);
+            currentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+            dateArray.push(new Date(currentDate));
+            currentDate.setTime(currentDate.getTime() + DAY);
+        }
+
+        return dateArray;
+    }
+
+    let labelDays = getLabelDays(new Date());
+
+    let uniqueKey = 'key';
 
     return (
         <div>
-            {/* <Button
-                className="settings__add-button"
-                icon={<PlusOutlined />}
-                type="primary"
-                onClick={() => setVisible(true)}
-            >
-                Add Booking
-            </Button>
-
-            <Modal
-                title="Add Booking"
-                visible={visible}
-                footer={null}
-                onCancel={() => setVisible(false)}
-            >
-                {props.error ? (
-                    <Alert
-                        className="alert-message"
-                        message={props.error}
-                        type="error"
-                        closable
-                    />
-                ) : null}
-                <Form
-                    initialValues={{
-                        ["note"]: ""
-                    }}
-                    onFinish={handleSubmit}
-                    layout="vertical"
-                >
-                    <Form.Item
-                        name="status"
-                        label="Status"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Please choose booking status!"
-                            }
-                        ]}
-                    >
-                        <Select placeholder="Select a status" allowClear>
-                            <Option value="CONFIRMED">Confirmed</Option>
-                            <Option value="FINISHED">Finished</Option>
-                            <Option value="PENDING_CONFIRMATION">
-                                Pending Confirmation
-                            </Option>
-                        </Select>
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Booked Dates"
-                        name="dates"
-                        hasFeedback
-                        rules={[
-                            {
-                                required: true,
-                                message: "Please choose booking dates!"
-                            }
-                        ]}
-                    >
-                        <RangePicker
-                            className="date-picker"
-                            format={dateFormat}
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="room"
-                        label="Room"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Please choose booked room!"
-                            }
-                        ]}
-                    >
-                        <Select placeholder="Select a room" allowClear>
-                            {props.rooms.map(room => {
-                                return (
-                                    <Option key={room.id} value={room.id}>
-                                        {room.name}
-                                    </Option>
-                                );
-                            })}
-                        </Select>
-                    </Form.Item>
-
-                    <Form.Item
-                        name="client"
-                        label="Client"
-                        rules={[
-                            {
-                                required: true,
-                                message: "Please choose client!"
-                            }
-                        ]}
-                    >
-                        <Select placeholder="Select a client" allowClear>
-                            {props.clients.map(client => {
-                                return (
-                                    <Option key={client.id} value={client.id}>
-                                        {client.name}
-                                    </Option>
-                                );
-                            })}
-                        </Select>
-                    </Form.Item>
-
-                    <Form.Item
-                        name="note"
-                        label="Note"
-                        rules={[
-                            {
-                                max: 100,
-                                message: "Maximum of 100 characters."
-                            }
-                        ]}
-                    >
-                        <Input placeholder="Enter Booking Note" />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" block>
-                            Add
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Modal> */}
-            Booking Calendar
+            <div className="calendar">
+                <div className="calendar-row">
+                    <div className="calendar-field room-name">
+                        Choose Date Here
+                    </div>
+                    {
+                        labelDays.map(labelDay => {
+                            return <div className="calendar-field calendar-date-field" key={labelDay}>{ labelDay.split('-')[0] + '. ' + labelDay.split('-')[1]  + '.' }</div>  
+                        })
+                    }
+                </div>
+                {
+                    props.rooms.map((room, j) => {
+                        uniqueKey++;
+                        return (
+                            <div className="calendar-row">
+                                <div key={"key" + uniqueKey} className="calendar-field room-name">
+                                    { room.name }
+                                </div>
+                                {
+                                    labelDays.map((labelDay, i) => {
+                                        let field = "";
+                                        if (isBooked(room, labelDay)) {
+                                            const bookingId = isBooked(room, labelDay).split(' ')[1].split('-')[1];
+                                            let bookingInfo = props.bookings.filter(b => b.id == bookingId)[0];
+                                            let tooltipText = () => {
+                                                return (
+                                                  <>
+                                                     <p>Room: {bookingInfo.room.name}</p>
+                                                     <p>Client {bookingInfo.client.name}</p>
+                                                     <p>Total: {bookingInfo.price}</p>
+                                                     <p>Start Date: {bookingInfo.startDate}</p>
+                                                     <p>End Date: {bookingInfo.endDate}</p>
+                                                </>
+                                               )
+                                            }
+                                            field = <Tooltip arrowPointAtCenter className={"calendar-field can-book " + (isBooked(room, labelDay))} title={tooltipText}><div></div></Tooltip> 
+                                        }
+                                        else {
+                                            field = <div className={"calendar-field can-book "} key={i}></div> 
+                                        }
+                                        return field;
+                                    })
+                                }
+                            </div>                
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 };

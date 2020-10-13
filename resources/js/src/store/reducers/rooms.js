@@ -21,7 +21,6 @@ const reducer = (state = initialState, action) => {
                 rooms: state.rooms.concat(action.room)
             };
         case actionTypes.ADD_ROOM_FAIL:
-            console.log(action.error);
             return {
                 ...state,
                 loading: false,

@@ -242,3 +242,90 @@ body {
     }
 }
 // END SETTINGS
+
+// CALENDAR
+.calendar {
+    margin: 2rem 0;
+    font-size: 15px;
+    overflow-y: scroll;
+    overflow-x: visible;
+}
+
+.calendar-row {
+    display: flex;
+    justify-content: stretch;
+    border-bottom: 5px solid #f8f8f8;
+    border-top: 5px solid #f8f8f8;
+}
+
+.calendar-col {
+}
+
+.room-name {
+    width: 200px !important;
+    background-color: #f8f8f8;
+    color: #333;
+    border: none !important;
+    //border-bottom: 1px solid var(--color-secondary) !important;
+    text-align: center;
+    padding: 1rem 0 !important;
+}
+
+.calendar-date-field {
+    background-color: #f8f8f8;
+    color: #333;
+    // border: none !important;
+    text-align: center;
+}
+
+.calendar-field {
+    border-bottom: 1px solid rgb(231, 231, 231);
+    border-right: 1px solid rgb(231, 231, 231);
+    text-align: center;
+    padding: 15px 0;
+    width: 75px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.field-is-booked {
+    background-color: rgb(67, 104, 67);
+}
+
+.field-is-booked-new {
+    border: none;
+    background-color: #f9dc5c;
+}
+
+.field-is-booked-confirmed {
+    border: none;
+    background-color: rgb(10, 214, 55);
+}
+
+.field-is-booked-checkedin {
+    border: none;
+    background-color: rgb(71, 10, 214);
+}
+
+.field-is-booked-checkedout {
+    border: none;
+    background-color: rgb(214, 10, 146);
+}
+
+.caledar-tooltip {
+    height: 100%;
+    padding: 15px 0;
+}
+// END CALENDAR
+
+:global(.ant-btn-primary) {
+    background-color: $primary;
+    border-color: $primary;
+    &:hover,
+    &:visited,
+    &:active,
+    &:focus {
+        background-color: $primary-dark !important;
+        border-color: $primary-dark !important;
+    }
+}

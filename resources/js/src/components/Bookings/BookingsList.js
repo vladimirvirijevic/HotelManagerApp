@@ -1,10 +1,18 @@
 import React from "react";
-import { Table, Alert } from "antd";
+import { Table } from "antd";
 
 const columns = [
     {
         title: "Id",
         dataIndex: "id"
+    },
+    {
+        title: "Room",
+        dataIndex: ['room', 'name']
+    },
+    {
+        title: "Client",
+        dataIndex: ['client', 'name']
     },
     {
         title: "Start Date",
