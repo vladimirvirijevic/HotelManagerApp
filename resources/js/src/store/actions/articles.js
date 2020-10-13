@@ -180,3 +180,37 @@ export const addImportedArticle = importedArticle => {
     };
 };
 
+export const getImportedArticlesStart = () => {
+    return {
+        type: actionTypes.GET_IMPORTED_ARTICLES_START
+    };
+};
+
+export const getImportedArticlesSuccess = importedArticles => {
+    return {
+        type: actionTypes.GET_IMPORTED_ARTICLES_SUCCESS,
+        importedArticles: importedArticles
+    };
+};
+
+export const getImportedArticlesFail = error => {
+    return {
+        type: actionTypes.GET_IMPORTED_ARTICLES_FAIL,
+        error: error
+    };
+};
+
+export const getImportedArticles = () => {
+    return dispatch => {
+        dispatch(getImportedArticlesStart());
+        axios
+            .get("importedArticle/all")
+            .then(response => {
+                dispatch(getImportedArticlesSuccess(response.data.importedArticles));
+            })
+            .catch(error => {
+                dispatch(getImportedArticlesFail(error));
+            });
+    };
+};
+

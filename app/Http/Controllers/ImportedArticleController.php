@@ -55,6 +55,9 @@ class ImportedArticleController extends Controller
         $importedArticle = new ImportedArticle($validator->validate());
 
         if($user->importedArticles()->save($importedArticle)){
+            $importedArticle->article = Article::find($importedArticle->article_id);
+            $importedArticle->department = Department::find($importedArticle->department_id);
+            $importedArticle->unit = Unit::find($importedArticle->unit_id);
             return response()->json(['message' => 'Unit added', 'importedArticle' => $importedArticle],200);
         }
 

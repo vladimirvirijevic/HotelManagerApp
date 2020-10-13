@@ -25,6 +25,7 @@ const WasteManagment = (props) => {
         props.onGetDepartments();
         props.onGetArticles();
         props.onGetUnits();
+        props.onGetImportedArticles();
     }, []);
 
     return (
@@ -40,6 +41,7 @@ const WasteManagment = (props) => {
                         key="1">
                     <ImportedArticles 
                         articles={props.articles} 
+                        importedArticles={props.importedArticles} 
                         departments={props.departments} 
                         units={props.units} 
                         addImportedArticle={addImportedArticle}/>
@@ -64,6 +66,7 @@ const maptStateToProps = state => {
         departments: state.departments.departments,
         articles: state.articles.articles,
         units: state.articles.units,
+        importedArticles: state.articles.importedArticles
     }
 }
 
@@ -72,7 +75,8 @@ const mapDispatchToProps = dispatch => {
         onGetDepartments: () => dispatch(actions.getDepartments()),
         onGetArticles: () => dispatch(actions.getArticles()),
         onGetUnits: () => dispatch(actions.getUnits()),
-        onAddImportedArticle: importedArticle => dispatch(actions.addImportedArticle(importedArticle))
+        onAddImportedArticle: importedArticle => dispatch(actions.addImportedArticle(importedArticle)),
+        onGetImportedArticles: () => dispatch(actions.getImportedArticles())
     };
 }
 

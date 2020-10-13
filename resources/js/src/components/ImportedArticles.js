@@ -1,8 +1,35 @@
 import React, { useState } from 'react'
-import { Modal, Button, Form, DatePicker, Select, Input, InputNumber } from "antd";
+import { Modal, Button, Form, DatePicker, Select, Table, InputNumber } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
+
+const columns = [
+    {
+        title: "Id",
+        dataIndex: "id"
+    },
+    {
+        title: "Department",
+        dataIndex: ['department', 'name']
+    },
+    {
+        title: "Article",
+        dataIndex: ['article', 'name']
+    },
+    {
+        title: "Amount",
+        dataIndex: "amount"
+    },
+    {
+        title: "Unit",
+        dataIndex: ['unit', 'name']
+    },
+    {
+        title: "Date",
+        dataIndex: "date"
+    }
+];
 
 const ImportedArticles = props => {
     const [visible, setVisible] = useState(false);
@@ -21,7 +48,12 @@ const ImportedArticles = props => {
             >
                 Add
             </Button>
-
+            <Table
+                pagination={{ pageSize: 6 }}
+                columns={columns}
+                dataSource={props.importedArticles}
+                rowKey="id"
+            />
             <Modal
                 title="Add Article"
                 visible={visible}
