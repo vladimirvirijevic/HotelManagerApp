@@ -28,6 +28,15 @@ const Layout = props => {
                     </NavLink>
                     <NavLink
                         className="sidenav__item"
+                        to="/waste"
+                        exact
+                        activeClassName="active-link"
+                    >
+                        <i className="fas fa-trash sidenav__icon"></i>{" "}
+                        <p className="sidenav__item__text">Waste</p>
+                    </NavLink>
+                    <NavLink
+                        className="sidenav__item"
                         to="/settings"
                         exact
                         activeClassName="active-link"

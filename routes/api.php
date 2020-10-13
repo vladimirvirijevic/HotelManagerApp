@@ -52,3 +52,11 @@ Route::group([
     Route::get('all', 'DepartmentController@index');
     Route::post('store', 'DepartmentController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'article'
+], function ($router) {
+    Route::get('all', 'ArticleController@index');
+    Route::post('store', 'ArticleController@store');
+});

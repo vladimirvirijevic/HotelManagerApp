@@ -9,6 +9,7 @@ import * as actions from "../store/actions/index";
 import Bookings from "./Bookings";
 import Settings from "./Settings/Settings";
 import Logout from "./Auth/Logout";
+import WasteManagment from "./WasteManagment";
 
 const App = props => {
     useEffect(() => {
@@ -23,6 +24,12 @@ const App = props => {
                 <GuardedRoute
                     path="/bookings"
                     component={Bookings}
+                    exact
+                    auth={props.isAuth}
+                />
+                <GuardedRoute
+                    path="/waste"
+                    component={WasteManagment}
                     exact
                     auth={props.isAuth}
                 />

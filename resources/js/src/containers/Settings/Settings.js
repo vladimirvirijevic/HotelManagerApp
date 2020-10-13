@@ -7,6 +7,7 @@ import * as actions from "../../store/actions/index";
 import Clients from "../../components/Clients";
 import Services from "../../components/Services";
 import Departments from "../../components/Departments";
+import Articles from "../../components/Articles";
 
 const { TabPane } = Tabs;
 
@@ -81,6 +82,21 @@ const Settings = props => {
                         addDepartment={props.onAddDepartment}
                     />
                 </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <AndroidOutlined />
+                            Articles
+                        </span>
+                    }
+                    key="5"
+                >
+                    <Articles
+                        error={props.articleError}
+                        articles={props.articles}
+                        addArticle={props.onAddArticle}
+                    />
+                </TabPane>
             </Tabs>
         </div>
     );
@@ -96,6 +112,8 @@ const mapStateToProps = state => {
         serviceError: state.services.error,
         departments: state.departments.departments,
         departmentError: state.departments.error,
+        articles: state.articles.articles,
+        articleError: state.articles.error
     };
 };
 
@@ -108,7 +126,8 @@ const mapDispatchToProps = dispatch => {
         onAddService: service => dispatch(actions.addService(service)),
         onGetServices: () => dispatch(actions.getServices()),
         onAddDepartment: department => dispatch(actions.addDepartment(department)),
-        onGetDepartments: () => dispatch(actions.getDepartments())
+        onGetDepartments: () => dispatch(actions.getDepartments()),
+        onAddArticle: article => dispatch(actions.addArticle(article))
     };
 };
 
