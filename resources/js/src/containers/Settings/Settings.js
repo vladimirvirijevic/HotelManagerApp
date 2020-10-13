@@ -8,6 +8,7 @@ import Clients from "../../components/Clients";
 import Services from "../../components/Services";
 import Departments from "../../components/Departments";
 import Articles from "../../components/Articles";
+import Units from "../../components/Units";
 
 const { TabPane } = Tabs;
 
@@ -18,6 +19,7 @@ const Settings = props => {
         props.onGetServices();
         props.onGetDepartments();
         props.onGetArticles();
+        props.onGetUnits();
     }, []);
 
     return (
@@ -98,6 +100,21 @@ const Settings = props => {
                         addArticle={props.onAddArticle}
                     />
                 </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <AndroidOutlined />
+                            Units
+                        </span>
+                    }
+                    key="6"
+                >
+                    <Units
+                        error={props.unitError}
+                        units={props.units}
+                        addUnit={props.onAddUnit}
+                    />
+                </TabPane>
             </Tabs>
         </div>
     );
@@ -114,7 +131,9 @@ const mapStateToProps = state => {
         departments: state.departments.departments,
         departmentError: state.departments.error,
         articles: state.articles.articles,
-        articleError: state.articles.error
+        articleError: state.articles.error,
+        units: state.articles.units,
+        unitError: state.articles.errorUnits
     };
 };
 
@@ -130,6 +149,8 @@ const mapDispatchToProps = dispatch => {
         onGetDepartments: () => dispatch(actions.getDepartments()),
         onAddArticle: article => dispatch(actions.addArticle(article)),
         onGetArticles: () => dispatch(actions.getArticles()),
+        onAddUnit: unit => dispatch(actions.addUnit(unit)),
+        onGetUnits: () => dispatch(actions.getUnits())
     };
 };
 

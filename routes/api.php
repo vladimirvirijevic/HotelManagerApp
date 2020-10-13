@@ -60,3 +60,11 @@ Route::group([
     Route::get('all', 'ArticleController@index');
     Route::post('store', 'ArticleController@store');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'unit'
+], function ($router) {
+    Route::get('all', 'UnitController@index');
+    Route::post('store', 'UnitController@store');
+});

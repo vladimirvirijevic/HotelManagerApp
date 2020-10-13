@@ -55,7 +55,6 @@ class ArticleController extends Controller
     public function validateArticle(){
         $user = Auth::user();
         return Validator::make(request()->all(), [
-//            'name' => 'required|string|max:100',
             'name' => 'required|string|unique:articles,name,NULL,id,user_id,'. $user->id,
         ]);
     }

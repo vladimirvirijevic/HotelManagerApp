@@ -71,4 +71,74 @@ export const getArticles = () => {
     };
 };
 
+// UNITS
+export const addUnitStart = () => {
+    return {
+        type: actionTypes.ADD_UNIT_START
+    };
+};
+
+export const addUnitSuccess = unit => {
+    return {
+        type: actionTypes.ADD_UNIT_SUCCESS,
+        unit: unit
+    };
+};
+
+export const addUnitFail = error => {
+    return {
+        type: actionTypes.ADD_UNIT_FAIL,
+        error: error
+    };
+};
+
+export const addUnit = unit => {
+    return dispatch => {
+        dispatch(addUnitStart());
+        axios
+            .post("unit/store", unit)
+            .then(response => {
+                dispatch(addUnitSuccess(response.data.unit));
+            })
+            .catch(e => {
+                let errorMessage = "Unit already exists!";
+                dispatch(addUnitFail(errorMessage));
+            });
+    };
+};
+
+export const getUnitsStart = () => {
+    return {
+        type: actionTypes.GET_UNITS_START
+    };
+};
+
+export const getUnitsSuccess = units => {
+    return {
+        type: actionTypes.GET_UNITS_SUCCESS,
+        units: units
+    };
+};
+
+export const getUnitsFail = error => {
+    return {
+        type: actionTypes.GET_UNITS_FAIL,
+        error: error
+    };
+};
+
+export const getUnits = () => {
+    return dispatch => {
+        dispatch(getUnitsStart());
+        axios
+            .get("unit/all")
+            .then(response => {
+                dispatch(getUnitsSuccess(response.data.units));
+            })
+            .catch(error => {
+                dispatch(getUnitsFail(error));
+            });
+    };
+};
+
 
