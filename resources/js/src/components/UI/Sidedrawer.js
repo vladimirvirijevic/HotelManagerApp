@@ -21,6 +21,14 @@ const Sidedrawer = props => {
                 </NavLink>
                 <NavLink
                     className="sidenav__item"
+                    to="/tickets"
+                    exact
+                    activeClassName="active-link"
+                >
+                    <p className="drawer-text">Tickets</p>
+                </NavLink>
+                <NavLink
+                    className="sidenav__item"
                     to="/waste"
                     exact
                     activeClassName="active-link"

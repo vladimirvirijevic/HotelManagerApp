@@ -28,6 +28,14 @@ const Layout = props => {
                     </NavLink>
                     <NavLink
                         className="sidenav__item"
+                        to="/tickets"
+                        activeClassName="active-link"
+                    >
+                        <i className="fas fa-clipboard-list sidenav__icon"></i>{" "}
+                        <p className="sidenav__item__text">Tickets</p>
+                    </NavLink>
+                    <NavLink
+                        className="sidenav__item"
                         to="/waste"
                         exact
                         activeClassName="active-link"

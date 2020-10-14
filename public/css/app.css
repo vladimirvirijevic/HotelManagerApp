@@ -30960,6 +30960,19 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin-left: 10px;
 }
 
+.ant-btn-primary {
+  background-color: #5e5ec5;
+  border-color: #5e5ec5;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:visited,
+.ant-btn-primary:active,
+.ant-btn-primary:focus {
+  background-color: #464694 !important;
+  border-color: #464694 !important;
+}
+
 .date-picker {
   width: 100%;
 }
@@ -31219,16 +31232,36 @@ div.ant-typography-edit-content.ant-typography-rtl {
   padding: 15px 0;
 }
 
-.ant-btn-primary {
-  background-color: #5e5ec5;
-  border-color: #5e5ec5;
+.create-ticket-column {
+  display: flex;
+  width: 100%;
 }
 
-.ant-btn-primary:hover,
-.ant-btn-primary:visited,
-.ant-btn-primary:active,
-.ant-btn-primary:focus {
-  background-color: #464694 !important;
-  border-color: #464694 !important;
+.create-ticket-column__item-left {
+  width: 100%;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .create-ticket-column__item-left {
+    margin-right: 0;
+  }
+}
+
+.create-ticket-column__item-right {
+  width: 100%;
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .create-ticket-column__item-right {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .create-ticket-column {
+    flex-direction: column;
+  }
 }
 

@@ -1,4 +1,4 @@
-export { register, login, authCheckState, logout } from "./auth";
+export { register, login, authCheckState, logout, getUsers } from "./auth";
 export { addRoom, getRooms } from "./rooms";
 export { addClient, getClients } from "./clients";
 export { addService, getServices } from "./services";

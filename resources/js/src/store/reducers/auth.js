@@ -1,11 +1,10 @@
 import * as actionTypes from "../actions/actionTypes";
 
-
-
 const initialState = {
     error: null,
     token: null,
-    loading: false
+    loading: false,
+    users: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +37,25 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 error: action.error,
                 loading: false
+            };
+        case actionTypes.GET_USERS_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.GET_USERS_SUCCESS:
+            console.log(action.users)
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                users: action.users
+            };
+        case actionTypes.GET_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
             };
         default:
             return state;

@@ -12,6 +12,7 @@
     rel="stylesheet">
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
         <script src="https://kit.fontawesome.com/e54ced1164.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css">
     </head>
     <body>
         <div id="root"></div>

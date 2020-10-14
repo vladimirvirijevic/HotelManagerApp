@@ -10,6 +10,8 @@ import Bookings from "./Bookings";
 import Settings from "./Settings/Settings";
 import Logout from "./Auth/Logout";
 import WasteManagment from "./WasteManagment";
+import Tickets from "./Tickets";
+import CreateTicket from "../components/CreateTicket";
 
 const App = props => {
     useEffect(() => {
@@ -24,6 +26,18 @@ const App = props => {
                 <GuardedRoute
                     path="/bookings"
                     component={Bookings}
+                    exact
+                    auth={props.isAuth}
+                />
+                <GuardedRoute
+                    path="/tickets"
+                    component={Tickets}
+                    exact
+                    auth={props.isAuth}
+                />
+                <GuardedRoute
+                    path="/tickets/create"
+                    component={CreateTicket}
                     exact
                     auth={props.isAuth}
                 />
@@ -47,32 +61,6 @@ const App = props => {
             </Layout>
         </Switch>
     );
-
-    // if (props.isAuth) {
-    //     routes = (
-    //         <Layout>
-    //             <Switch>
-    //                 <GuardedRoute
-    //                     path="/"
-    //                     component={Bookings}
-    //                     exact
-    //                     auth={props.isAuth}
-    //                 />
-    //                 <GuardedRoute
-    //                     path="/settings"
-    //                     component={Settings}
-    //                     exact
-    //                     auth={props.isAuth}
-    //                 />
-    //                 <GuardedRoute
-    //                     path="/logout"
-    //                     component={Logout}
-    //                     auth={props.isAuth}
-    //                 />
-    //             </Switch>
-    //         </Layout>
-    //     );
-    // }
 
     return <div className="container">{routes}</div>;
 };

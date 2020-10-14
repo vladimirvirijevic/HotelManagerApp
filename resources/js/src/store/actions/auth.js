@@ -120,3 +120,40 @@ export const login = loginInfo => {
             });
     };
 };
+
+// USERS
+export const getUsersStart = () => {
+    return {
+        type: actionTypes.GET_USERS_START
+    };
+};
+
+export const getUsersSuccess = users => {
+    return {
+        type: actionTypes.GET_USERS_SUCCESS,
+        users: users
+    };
+};
+
+export const getUsersFail = error => {
+    return {
+        type: actionTypes.GET_USERS_SUCCESS,
+        error: error
+    };
+};
+
+export const getUsers = () => {
+    return dispatch => {
+        dispatch(getUsersStart());
+        axios
+            .get("user/all")
+            .then(response => {
+                dispatch(getUsersSuccess(response.data.users));
+                console.log(response.data.users);
+            })
+            .catch(error => {
+                dispatch(getUsersFail(error));
+            });
+    };
+};
+

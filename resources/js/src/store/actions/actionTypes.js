@@ -7,6 +7,11 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
 export const LOGOUT = "LOGOUT";
 
+// USERS
+export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
+export const GET_USERS_FAIL = "GET_USERS_FAIL";
+export const GET_USERS_START = "GET_USERS_START";
+
 // ROOMS
 export const ADD_ROOM_START = "ADD_ROOM_START";
 export const ADD_ROOM_SUCCESS = "ADD_ROOM_SUCCESS";
