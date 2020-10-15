@@ -1,8 +1,33 @@
 import React, { useEffect } from 'react'
-import { Button } from 'antd';
+import { Button, Table } from 'antd';
 import { PlusOutlined } from "@ant-design/icons";
+import { connect } from 'react-redux';
+import * as actions from "../store/actions/index";
+
+const columns = [
+    {
+        title: "Id",
+        dataIndex: "id"
+    },
+    {
+        title: "Name",
+        dataIndex: "name"
+    },
+    {
+        title: "Service",
+        dataIndex: ['service', 'name']
+    },
+    {
+        title: "Owner",
+        dataIndex: ['owner', 'name']
+    }
+]; 
 
 const Tickets = props => {
+    useEffect(() => {
+        props.onGetTickets();
+    }, []);
+
     const addTicket = () => {
         props.history.push('/tickets/create');
     }
@@ -17,8 +42,26 @@ const Tickets = props => {
             >
                 Add Ticket
             </Button>
+            <Table
+                pagination={{ pageSize: 6 }}
+                columns={columns}
+                dataSource={props.tickets}
+                rowKey="id"
+            />
         </div>
     )
 }
 
-export default Tickets
+const mapStateToProps = state => {
+    return {
+        tickets: state.tickets.tickets
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetTickets: () => dispatch(actions.getTickets())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tickets)

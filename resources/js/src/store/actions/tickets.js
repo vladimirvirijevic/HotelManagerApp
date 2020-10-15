@@ -36,3 +36,39 @@ export const addTicket = ticket => {
             });
     };
 };
+
+export const getTicketsStart = () => {
+    return {
+        type: actionTypes.GET_TICKETS_START
+    };
+};
+
+export const getTicketsSuccess = tickets => {
+    return {
+        type: actionTypes.GET_TICKETS_SUCCESS,
+        tickets: tickets
+    };
+};
+
+export const getTicketsFail = error => {
+    return {
+        type: actionTypes.GET_TICKETS_FAIL,
+        error: error
+    };
+};
+
+export const getTickets = () => {
+    return dispatch => {
+        dispatch(getTicketsStart());
+        axios
+            .get("ticket/all")
+            .then(response => {
+                dispatch(getTicketsSuccess(response.data.tickets));
+                console.log(response.data);
+                console.log("g");
+            })
+            .catch(error => {
+                dispatch(getTicketsFail(error));
+            });
+    };
+};

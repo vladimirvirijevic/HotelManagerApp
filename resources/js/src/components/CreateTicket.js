@@ -3,8 +3,6 @@ import { Card } from 'antd';
 import { Button, Form, Input, Select } from "antd";
 import { connect } from 'react-redux';
 import * as actions from "../store/actions/index";
-import ReactQuill from 'react-quill';
-import RichTextEditor from 'react-rte';
 
 const { Option } = Select;
 const { TextArea } = Input;

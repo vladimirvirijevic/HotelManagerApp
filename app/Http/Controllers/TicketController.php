@@ -22,7 +22,13 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Auth::user()->tickets();
+        $user = Auth::user();
+        $tickets = $user->tickets()->get();
+
+        foreach($tickets as $ticket) {
+            $ticket->service = Service::find($ticket->service_id);
+            $ticket->owner = $user;
+        }
 
         return response()->json(['message' => 'Success', 'tickets' => $tickets],200);
     }

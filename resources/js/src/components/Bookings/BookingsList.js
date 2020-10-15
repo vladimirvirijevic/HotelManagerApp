@@ -30,8 +30,6 @@ const columns = [
 
 
 const BookingsList = (props) => {
-
-
     return <div>
         <Table
             pagination={{ pageSize: 6 }}
@@ -40,8 +38,6 @@ const BookingsList = (props) => {
             rowKey="id"
         />
     </div>
-
-        
 };
 
 export default BookingsList;
