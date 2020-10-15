@@ -83,3 +83,11 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'UserController@index');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'ticket'
+], function ($router) {
+    Route::get('all', 'TicketController@index');
+    Route::post('store', 'TicketController@store');
+});

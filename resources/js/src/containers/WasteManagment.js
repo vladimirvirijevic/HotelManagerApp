@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { ShrinkOutlined, ArrowsAltOutlined } from "@ant-design/icons";
-import { Tabs, Modal, Button, Form, Input, InputNumber } from "antd";
+import { Tabs, Menu } from "antd";
 import ImportedArticles from '../components/ImportedArticles';
 import { connect } from 'react-redux';
 import * as actions from "../store/actions/index";
@@ -34,7 +33,6 @@ const WasteManagment = (props) => {
                 <TabPane
                         tab={
                             <span>
-                                <ShrinkOutlined />
                                 Article In
                             </span>
                         }
@@ -49,7 +47,6 @@ const WasteManagment = (props) => {
                 <TabPane
                         tab={
                             <span>
-                                <ArrowsAltOutlined />
                                 Article Out
                             </span>
                         }

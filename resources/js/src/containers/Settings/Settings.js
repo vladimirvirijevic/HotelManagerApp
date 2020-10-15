@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Tabs } from "antd";
-import { AppleOutlined, AndroidOutlined } from "@ant-design/icons";
 import Rooms from "../../components/Rooms";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
@@ -28,7 +27,6 @@ const Settings = props => {
                 <TabPane
                     tab={
                         <span>
-                            <AppleOutlined />
                             Rooms
                         </span>
                     }
@@ -43,7 +41,6 @@ const Settings = props => {
                 <TabPane
                     tab={
                         <span>
-                            <AndroidOutlined />
                             Clients
                         </span>
                     }
@@ -58,7 +55,6 @@ const Settings = props => {
                 <TabPane
                     tab={
                         <span>
-                            <AndroidOutlined />
                             Services
                         </span>
                     }
@@ -73,7 +69,6 @@ const Settings = props => {
                 <TabPane
                     tab={
                         <span>
-                            <AndroidOutlined />
                             Departments
                         </span>
                     }
@@ -88,7 +83,6 @@ const Settings = props => {
                 <TabPane
                     tab={
                         <span>
-                            <AndroidOutlined />
                             Articles
                         </span>
                     }
@@ -103,7 +97,6 @@ const Settings = props => {
                 <TabPane
                     tab={
                         <span>
-                            <AndroidOutlined />
                             Units
                         </span>
                     }

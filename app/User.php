@@ -92,4 +92,12 @@ class User extends Authenticatable implements JWTSubject
     public function importedArticles(){
         return $this->hasMany('App\ImportedArticle');
     }
+
+    public function tickets(){
+        return $this->hasMany('App\Ticket');
+    }
+
+    public function contributions(){
+        return $this->belongsToMany('App\Ticket', 'contributors');
+    }
 }

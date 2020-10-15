@@ -18,12 +18,8 @@ const CreateTicket = props => {
     const [internalText, setInternalText] = useState("");
 
     const handleSubmit = (values) => {
-        console.log(values);
-    }
-
-    const handleInternalText = (value) => {
-        setInternalText(value);
-        console.log(internalText);
+        props.onAddTicket(values);
+        console.log('r');
     }
 
     return (
@@ -149,7 +145,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onGetServices: () => dispatch(actions.getServices()),
-        onGetUsers: () => dispatch(actions.getUsers())
+        onGetUsers: () => dispatch(actions.getUsers()),
+        onAddTicket: ticket => dispatch(actions.addTicket(ticket))
     };
 };
 
