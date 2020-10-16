@@ -22,7 +22,6 @@ export const addArticleFail = error => {
 };
 
 export const addArticle = article => {
-    console.log(article);
     return dispatch => {
         dispatch(addArticleStart());
         axios
@@ -165,7 +164,6 @@ export const addImportedArticleFail = error => {
 };
 
 export const addImportedArticle = importedArticle => {
-    console.log(importedArticle);
     return dispatch => {
         dispatch(addImportedArticleStart());
         axios

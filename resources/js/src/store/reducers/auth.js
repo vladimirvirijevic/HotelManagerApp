@@ -44,7 +44,6 @@ const reducer = (state = initialState, action) => {
                 loading: true
             };
         case actionTypes.GET_USERS_SUCCESS:
-            console.log(action.users)
             return {
                 ...state,
                 loading: false,

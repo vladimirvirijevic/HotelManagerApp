@@ -53,6 +53,19 @@ class TicketController extends Controller
         $ticket->serviceName = $ticket->service->name;
         $ticket->contributors = $ticket->users;
 
+        $ticket->updates = $ticket->updates()->get();
+
+        foreach ($ticket->updates as $update) {
+            $update->timeEntries = TimeEntry::where('ticket_update_id', $update->id)->get();
+            $update->user = User::find($update->user_id);
+        }
+
+        foreach ($ticket->updates as $update) {
+            foreach ($update->timeEntries as $timeEntry) {
+                $timeEntry->user = User::find($timeEntry->contributor_id);
+            }
+        }
+
         return response()->json(['message' => 'Success', 'ticket' => $ticket],200);
     }
 

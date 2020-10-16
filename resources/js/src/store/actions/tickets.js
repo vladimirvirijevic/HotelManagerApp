@@ -27,7 +27,6 @@ export const addTicket = ticket => {
         axios
             .post("ticket/store", ticket)
             .then(response => {
-                console.log(response.data);
                 dispatch(addTicketSuccess(response.data.ticket));
             })
             .catch(e => {
@@ -98,7 +97,7 @@ export const getTicketById = (id) => {
             .get(`ticket/${id}`)
             .then(response => {
                 dispatch(getTicketSuccess(response.data.ticket));
-                console.log(response.data.ticket);
+                console.log(response.data);
             })
             .catch(error => {
                 dispatch(getTicketFail(error));

@@ -10,9 +10,9 @@ import Bookings from "./Bookings";
 import Settings from "./Settings/Settings";
 import Logout from "./Auth/Logout";
 import WasteManagment from "./WasteManagment";
-import Tickets from "./Tickets";
-import CreateTicket from "../components/CreateTicket";
-import UpdateTicket from "../components/UpdateTicket";
+import Tickets from "./Tickets/Tickets";
+import CreateTicket from "./Tickets/CreateTicket";
+import UpdateTicket from "./Tickets/UpdateTicket";
 
 const App = props => {
     useEffect(() => {

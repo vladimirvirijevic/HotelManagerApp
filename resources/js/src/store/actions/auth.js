@@ -149,7 +149,6 @@ export const getUsers = () => {
             .get("user/all")
             .then(response => {
                 dispatch(getUsersSuccess(response.data.users));
-                console.log(response.data.users);
             })
             .catch(error => {
                 dispatch(getUsersFail(error));

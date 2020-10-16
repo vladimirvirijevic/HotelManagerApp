@@ -31236,6 +31236,10 @@ div.ant-typography-edit-content.ant-typography-rtl {
   padding: 15px 0;
 }
 
+.tickets-table {
+  cursor: pointer;
+}
+
 .create-ticket-column {
   display: flex;
   width: 100%;
@@ -31289,5 +31293,32 @@ div.ant-typography-edit-content.ant-typography-rtl {
 .update-ticket__rangepicker {
   align-self: flex-end;
   margin-right: 15px;
+}
+
+.ticket-update {
+  margin: 20px 0;
+}
+
+.ticket-update__subtitle {
+  font-weight: bold;
+}
+
+.ticket-update__info {
+  display: flex;
+  background-color: #d6d6d6;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.ticket-update__info-item {
+  margin-right: 40px;
+}
+
+.ticket-update__descriptions {
+  padding: 10px;
+}
+
+.time-entries {
+  margin: 15px 0;
 }
 
