@@ -24,4 +24,8 @@ class Ticket extends Model
     {
         $this->service_id = $service->id;
     }
+
+    public function updates() {
+        return $this->hasMany('App\TicketUpdate');
+    }
 }

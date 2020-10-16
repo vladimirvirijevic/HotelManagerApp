@@ -105,3 +105,40 @@ export const getTicketById = (id) => {
             });
     };
 };
+
+// TICKET UPDATES
+export const addTicketUpdateStart = () => {
+    return {
+        type: actionTypes.ADD_TICKET_UPDATE_START
+    };
+};
+
+export const addTicketUpdateSuccess = ticketUpdate => {
+    return {
+        type: actionTypes.ADD_TICKET_UPDATE_SUCCESS,
+        ticketUpdate: ticketUpdate
+    };
+};
+
+export const addTicketUpdateFail = error => {
+    return {
+        type: actionTypes.ADD_TICKET_UPDATE_FAIL,
+        error: error
+    };
+};
+
+export const addTicketUpdate = ticketUpdate => {
+    return dispatch => {
+        dispatch(addTicketUpdateStart());
+        axios
+            .post("ticket/update", ticketUpdate)
+            .then(response => {
+                console.log(response.data);
+                dispatch(addTicketUpdateSuccess(response.data.ticketUpdate));
+            })
+            .catch(e => {
+                dispatch(addTicketFail(e.message));
+            });
+    };
+};
+

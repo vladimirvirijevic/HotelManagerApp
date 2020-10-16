@@ -91,4 +91,5 @@ Route::group([
     Route::get('all', 'TicketController@index');
     Route::get('{id}', 'TicketController@getById');
     Route::post('store', 'TicketController@store');
+    Route::post('update', 'TicketController@update');
 });

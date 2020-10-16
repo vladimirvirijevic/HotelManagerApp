@@ -4,7 +4,8 @@ const initialState = {
     tickets: [],
     loading: false,
     error: null,
-    updateTicket: null
+    updateTicket: null,
+    ticketUpdates: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -58,6 +59,25 @@ const reducer = (state = initialState, action) => {
                 updateTicket: action.ticket
             };
         case actionTypes.GET_TICKET_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
+        //TICKET UPDATES
+        case actionTypes.ADD_TICKET_UPDATE_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.ADD_TICKET_UPDATE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                ticketUpdates: state.ticketUpdates.concat(action.ticketUpdate)
+            };
+        case actionTypes.ADD_TICKET_UPDATE_FAIL:
             return {
                 ...state,
                 loading: false,

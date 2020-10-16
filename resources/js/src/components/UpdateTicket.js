@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from "../store/actions/index";
-import { Button, Form, Input, Tag, Card, TimePicker  } from "antd";
+import { Button, Form, Input, Tag, Card, TimePicker, Alert  } from "antd";
 
 const { RangePicker } = TimePicker;
 const { TextArea } = Input;
@@ -10,13 +10,60 @@ const format = 'HH:mm';
 
 const UpdateTicket = props => {
     const params  = useParams();
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    let errorMessage = null;
+
+    if (showErrorMessage) {
+        errorMessage = (
+            <Alert
+                className="alert-message"
+                message="You must set time for at least one user"
+                type="error"
+            />
+        );
+    }
 
     useEffect(() => {
         props.onGetTicket(params.id);
     }, []);
 
     const handleSubmit = values => {
-        console.log(values);
+        let contributors = [];
+
+        Object.keys(values).map(key => {
+            if (key.includes("contributor-")) {
+                if (values[key]) {
+                    const contributor = {
+                        contributor_id: key.split('-')[1],
+                        startTime: values[key][0].format("hh:mm"),
+                        endTime: values[key][1].format("hh:mm"),
+                        duration: values[key][1].diff(values[key][0], 'minutes')
+                    }
+
+                    contributors.push(contributor);
+                }
+            }
+        });
+
+        if (contributors.length == 0) {
+            setShowErrorMessage(true);
+            return;
+        }
+        else {
+            setShowErrorMessage(false);
+        }
+
+        const ticketUpdate = {
+            ticketId: props.ticket.id,
+            name: values.name,
+            description: values.description,
+            internalUpdate: values.internalUpdate,
+            contributors: contributors
+        }
+
+        console.log(ticketUpdate);
+
+        props.onAddTicketUpdate(ticketUpdate);
     }
 
     const handleGoBack = () => {
@@ -137,6 +184,7 @@ const UpdateTicket = props => {
 
     return (
         <div>
+            {errorMessage}
             {updateTicket}
         </div>
     )
@@ -150,7 +198,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetTicket: (id) => dispatch(actions.getTicketById(id))
+        onGetTicket: (id) => dispatch(actions.getTicketById(id)),
+        onAddTicketUpdate: ticketUpdate => dispatch(actions.addTicketUpdate(ticketUpdate))
     };
 };
 

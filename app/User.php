@@ -97,6 +97,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Ticket');
     }
 
+    public function ticketUpdates(){
+        return $this->hasMany('App\TicketUpdate');
+    }
+
     public function contributions(){
         return $this->belongsToMany('App\Ticket', 'contributors');
     }
