@@ -15,6 +15,11 @@ use Illuminate\Database\Eloquent\Builder;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +36,21 @@ class TicketController extends Controller
         }
 
         return response()->json(['message' => 'Success', 'tickets' => $tickets],200);
+    }
+
+    /**
+     * Get a resource
+     *
+     * @return JsonResponse
+     */
+    public function getById($id)
+    {
+        $ticket = Ticket::find($id);
+        $ticket->owner = $ticket->user;
+        $ticket->serviceName = $ticket->service->name;
+        $ticket->contributors = $ticket->users;
+
+        return response()->json(['message' => 'Success', 'ticket' => $ticket],200);
     }
 
     /**

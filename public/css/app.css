@@ -30960,6 +30960,10 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin-left: 10px;
 }
 
+.form-button {
+  margin-right: 15px;
+}
+
 .ant-btn-primary {
   background-color: #5e5ec5;
   border-color: #5e5ec5;
@@ -31263,5 +31267,27 @@ div.ant-typography-edit-content.ant-typography-rtl {
   .create-ticket-column {
     flex-direction: column;
   }
+}
+
+.update-ticket__tags {
+  margin: 0 0 20px 0;
+}
+
+.update-ticket__time-worked {
+  margin: 0 0 20px 0;
+}
+
+.update-ticket__time-worked-item {
+  display: flex;
+  align-items: center;
+}
+
+.update-ticket__time-worked-item p {
+  margin-right: 15px;
+}
+
+.update-ticket__rangepicker {
+  align-self: flex-end;
+  margin-right: 15px;
 }
 

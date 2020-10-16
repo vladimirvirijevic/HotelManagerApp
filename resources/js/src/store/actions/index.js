@@ -5,4 +5,4 @@ export { addService, getServices } from "./services";
 export { addBooking, getBookings } from "./bookings";
 export { addDepartment, getDepartments } from "./departments";
 export { addArticle, getArticles, addUnit, getUnits, addImportedArticle, getImportedArticles } from "./articles";
-export { addTicket, getTickets } from "./tickets";
+export { addTicket, getTickets, getTicketById } from "./tickets";

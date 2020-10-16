@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from 'antd';
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select, Card } from "antd";
 import { connect } from 'react-redux';
 import * as actions from "../store/actions/index";
 
@@ -18,6 +17,10 @@ const CreateTicket = props => {
     const handleSubmit = (values) => {
         props.onAddTicket(values);
         console.log('r');
+    }
+
+    const handleGoBack = () => {
+        props.history.goBack();
     }
 
     return (
@@ -120,8 +123,11 @@ const CreateTicket = props => {
                         </Form.Item>
                         
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
+                            <Button className="form-button" type="primary" htmlType="submit">
                                 Create
+                            </Button>
+                            <Button type="secondary" htmlType="button" onClick={handleGoBack}>
+                                Go Back
                             </Button>
                         </Form.Item>
                         

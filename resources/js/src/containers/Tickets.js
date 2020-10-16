@@ -29,7 +29,11 @@ const Tickets = props => {
     }, []);
 
     const addTicket = () => {
-        props.history.push('/tickets/create');
+        props.history.push("/tickets/create");
+    }
+
+    const handleRowClick = (data) => {
+        props.history.push(`/tickets/${data.id}`);
     }
 
     return (
@@ -47,7 +51,15 @@ const Tickets = props => {
                 columns={columns}
                 dataSource={props.tickets}
                 rowKey="id"
+                onRow={(record) => {
+                    return {
+                      onClick: () => {
+                          handleRowClick(record);
+                      },
+                    };
+                }}
             />
+            
         </div>
     )
 }

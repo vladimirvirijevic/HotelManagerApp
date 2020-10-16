@@ -12,6 +12,7 @@ import Logout from "./Auth/Logout";
 import WasteManagment from "./WasteManagment";
 import Tickets from "./Tickets";
 import CreateTicket from "../components/CreateTicket";
+import UpdateTicket from "../components/UpdateTicket";
 
 const App = props => {
     useEffect(() => {
@@ -29,18 +30,27 @@ const App = props => {
                     exact
                     auth={props.isAuth}
                 />
-                <GuardedRoute
-                    path="/tickets"
-                    component={Tickets}
-                    exact
-                    auth={props.isAuth}
-                />
-                <GuardedRoute
-                    path="/tickets/create"
-                    component={CreateTicket}
-                    exact
-                    auth={props.isAuth}
-                />
+                <Switch>
+                    <GuardedRoute
+                        path="/tickets/create"
+                        component={CreateTicket}
+                        exact
+                        auth={props.isAuth}
+                    />
+                    <GuardedRoute
+                        path="/tickets/:id"
+                        component={UpdateTicket}
+                        exact
+                        auth={props.isAuth}
+                    />
+                    <GuardedRoute
+                        path="/tickets"
+                        component={Tickets}
+                        exact
+                        auth={props.isAuth}
+                    />
+                </Switch>
+                
                 <GuardedRoute
                     path="/waste"
                     component={WasteManagment}

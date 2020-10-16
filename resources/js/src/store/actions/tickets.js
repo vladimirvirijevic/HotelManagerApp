@@ -64,11 +64,44 @@ export const getTickets = () => {
             .get("ticket/all")
             .then(response => {
                 dispatch(getTicketsSuccess(response.data.tickets));
-                console.log(response.data);
-                console.log("g");
             })
             .catch(error => {
                 dispatch(getTicketsFail(error));
+            });
+    };
+};
+
+export const getTicketStart = () => {
+    return {
+        type: actionTypes.GET_TICKET_START
+    };
+};
+
+export const getTicketSuccess = ticket => {
+    return {
+        type: actionTypes.GET_TICKET_SUCCESS,
+        ticket: ticket
+    };
+};
+
+export const getTicketFail = error => {
+    return {
+        type: actionTypes.GET_TICKET_FAIL,
+        error: error
+    };
+};
+
+export const getTicketById = (id) => {
+    return dispatch => {
+        dispatch(getTicketStart());
+        axios
+            .get(`ticket/${id}`)
+            .then(response => {
+                dispatch(getTicketSuccess(response.data.ticket));
+                console.log(response.data.ticket);
+            })
+            .catch(error => {
+                dispatch(getTicketFail(error));
             });
     };
 };

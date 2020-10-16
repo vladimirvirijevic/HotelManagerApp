@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     tickets: [],
     loading: false,
-    error: null
+    error: null,
+    updateTicket: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +40,24 @@ const reducer = (state = initialState, action) => {
                 tickets: action.tickets
             };
         case actionTypes.GET_TICKETS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
+        case actionTypes.GET_TICKET_START:
+            return {
+                ...state,
+                loading: true
+            };
+        case actionTypes.GET_TICKET_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                updateTicket: action.ticket
+            };
+        case actionTypes.GET_TICKET_FAIL:
             return {
                 ...state,
                 loading: false,
