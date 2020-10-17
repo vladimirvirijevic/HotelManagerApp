@@ -140,6 +140,12 @@ export const getUnits = () => {
     };
 };
 
+export const clearUnitsMessage = () => {
+    return {
+        type: actionTypes.CLEAR_UNITS_MESSAGE
+    };
+};
+
 
 // IMPORTED ARTICLE
 

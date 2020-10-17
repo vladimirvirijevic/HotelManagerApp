@@ -30,7 +30,7 @@ export const addClient = client => {
                 dispatch(addClientSuccess(response.data.client));
             })
             .catch(e => {
-                let errorMessage = "There was an error!";
+                let errorMessage = "Client with the same name already exists!";
                 dispatch(addClientFail(errorMessage));
             });
     };
@@ -67,5 +67,11 @@ export const getClients = () => {
             .catch(error => {
                 dispatch(getClientsFail(error));
             });
+    };
+};
+
+export const clearClientsMessage = () => {
+    return {
+        type: actionTypes.CLEAR_CLIENTS_MESSAGE
     };
 };

@@ -17,7 +17,6 @@ const columns = [
 ]
 
 const RoomsList = props => {
-    console.log('rooms list');
     return (
         <Table
             pagination={{ pageSize: 6 }}

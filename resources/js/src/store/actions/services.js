@@ -69,3 +69,9 @@ export const getServices = () => {
             });
     };
 };
+
+export const clearServicesMessage = () => {
+    return {
+        type: actionTypes.CLEAR_SERVICES_MESSAGE
+    };
+};

@@ -7,7 +7,8 @@ const initialState = {
     error: null,
     units: [],
     loadingUnits: false,
-    errorUnits: null
+    errorUnits: null,
+    success: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,39 +54,52 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_UNIT_START:
             return {
                 ...state,
-                loadingUnits: true
+                loadingUnits: true,
+                success: false
             };
         case actionTypes.ADD_UNIT_SUCCESS:
             return {
                 ...state,
                 loadingUnits: false,
                 errorUnits: null,
-                units: state.units.concat(action.unit)
+                units: state.units.concat(action.unit),
+                success: true
             };
         case actionTypes.ADD_UNIT_FAIL:
             return {
                 ...state,
                 loadingUnits: false,
-                errorUnits: action.error
+                errorUnits: action.error,
+                success: false
             };
         case actionTypes.GET_UNITS_START:
             return {
                 ...state,
-                loadingUnits: true
+                loadingUnits: true,
+                success: false
             };
         case actionTypes.GET_UNITS_SUCCESS:
             return {
                 ...state,
                 loadingUnits: false,
                 errorUnits: null,
-                units: action.units
+                units: action.units,
+                success: false
             };
         case actionTypes.GET_UNITS_FAIL:
             return {
                 ...state,
                 loadingUnits: false,
-                errorUnits: action.error
+                errorUnits: action.error,
+                success: false
             };
+        case actionTypes.CLEAR_UNITS_MESSAGE:
+            return {
+                ...state,
+                loading: false,
+                errorUnits: null,
+                success: false
+        };
         // IMPORTED ARTICLES
         case actionTypes.ADD_IMPORTED_ARTICLE_START:
             return {

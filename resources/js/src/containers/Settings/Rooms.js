@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert } from "antd";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
@@ -6,6 +6,10 @@ import RoomsList from "../../components/Settings/Rooms/RoomsList";
 import RoomsCreate from "../../components/Settings/Rooms/RoomsCreate";
 
 const Rooms = props => {
+    useEffect(() => {
+        props.onGetRooms();
+    }, []);
+
     let alertMessage = null;
 
     const handleCloseAlert = () => {

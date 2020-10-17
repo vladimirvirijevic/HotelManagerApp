@@ -3,6 +3,9 @@ import { Menu } from 'antd';
 import { Link, Switch, Route, useRouteMatch, withRouter } from 'react-router-dom';
 import Rooms from './Rooms';
 import Clients from './Clients';
+import Services from './Services';
+import Departments from './Departments';
+import Units from './Units';
 
 const Settings = props => {
     let { path, url } = useRouteMatch();
@@ -29,12 +32,27 @@ const Settings = props => {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="services">
-                    Services
+                    <Link onClick={() => setActiveRoute("services")} to={`${url}/services`}>
+                        Services
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="departments">
+                    <Link onClick={() => setActiveRoute("departments")} to={`${url}/departments`}>
+                        Departments
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="units">
+                    <Link onClick={() => setActiveRoute("units")} to={`${url}/units`}>
+                        Units
+                    </Link>
                 </Menu.Item>
             </Menu>
             <Switch>
                 <Route path={`${path}/rooms`} component={Rooms}/>
                 <Route path={`${path}/clients`} component={Clients}/>
+                <Route path={`${path}/services`} component={Services}/>
+                <Route path={`${path}/departments`} component={Departments}/>
+                <Route path={`${path}/units`} component={Units}/>
             </Switch>
         </div>
     )

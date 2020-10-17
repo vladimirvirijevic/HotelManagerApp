@@ -70,4 +70,10 @@ export const getDepartments = () => {
     };
 };
 
+export const clearDepartmentsMessage = () => {
+    return {
+        type: actionTypes.CLEAR_DEPARTMENTS_MESSAGE
+    };
+};
+
 

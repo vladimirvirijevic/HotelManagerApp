@@ -60,7 +60,7 @@ class ClientController extends Controller
 
     public function validateClient(){
         return Validator::make(request()->all(), [
-            'name' => 'required|string|max:100',
+            'name' => 'required|unique:clients|string|max:100',
             'email' => 'required|string|max:100',
             'phone' => 'required|string|max:100',
             'address' => 'required|string|max:100',
