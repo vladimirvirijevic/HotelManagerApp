@@ -71,3 +71,9 @@ export const getRooms = () => {
             });
     };
 };
+
+export const clearRoomMessage = () => {
+    return {
+        type: actionTypes.CLEAR_ROOM_MESSAGE
+    };
+};

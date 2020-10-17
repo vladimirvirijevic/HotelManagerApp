@@ -12,7 +12,7 @@ import bookingsReducer from "./src/store/reducers/bookings";
 import departmentsReducer from "./src/store/reducers/departments";
 import articlesReducer from "./src/store/reducers/articles";
 import ticketsReducer from "./src/store/reducers/tickets";
-import App from "./src/containers/App";
+import App from "./src/App";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

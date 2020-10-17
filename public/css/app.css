@@ -30960,6 +30960,11 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin-left: 10px;
 }
 
+.menu {
+  background-color: #f0f2f8;
+  margin-bottom: 30px;
+}
+
 .form-button {
   margin-right: 15px;
 }

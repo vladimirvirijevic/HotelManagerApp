@@ -46,7 +46,6 @@ const Layout = props => {
                     <NavLink
                         className="sidenav__item"
                         to="/settings"
-                        exact
                         activeClassName="active-link"
                     >
                         <i className="fas fa-cog sidenav__icon"></i>{" "}
