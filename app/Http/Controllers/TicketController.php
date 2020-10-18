@@ -30,12 +30,28 @@ class TicketController extends Controller
      */
     public function index()
     {
+        $allTickets = Ticket::whereHas('user', function (Builder $query) {
+            $user = Auth::user();
+            $query->where('hotel', 'like', $user->hotel);
+        })->get();
+
+        $tickets = [];
         $user = Auth::user();
-        $tickets = $user->tickets()->get();
+
+        foreach($allTickets as $ticket) {
+            $contributors = $ticket->users;
+
+            foreach ($contributors as $contributor) {
+                if ($contributor->id == $user->id) {
+                    array_push($tickets, $ticket);
+                    break;
+                }
+            }
+        }
 
         foreach($tickets as $ticket) {
             $ticket->service = Service::find($ticket->service_id);
-            $ticket->owner = $user;
+            $ticket->owner = User::find($ticket->user_id);
         }
 
         return response()->json(['message' => 'Success', 'tickets' => $tickets],200);
@@ -91,12 +107,18 @@ class TicketController extends Controller
         $service = Service::find($request->service);
         $ticket->setService($service);
 
+        lad($request->toArray());
+
         if($user->tickets()->save($ticket)){
 
-            foreach ($request->contributors as $contributorId) {
-                $contributor = User::find($contributorId);
-                $ticket->users()->attach($contributor);
+            if ($request->contributors) {
+                foreach ($request->contributors as $contributorId) {
+                    $contributor = User::find($contributorId);
+                    $ticket->users()->attach($contributor);
+                }
             }
+
+            $ticket->users()->attach($user);
 
             return response()->json(['message' => 'Ticket added', 'ticket' => $ticket],200);
         }
@@ -136,9 +158,8 @@ class TicketController extends Controller
     }
 
     public function validateTicket(){
-        $user = Auth::user();
         return Validator::make(request()->all(), [
-            'name' => 'required|string|unique:tickets,name,NULL,id,user_id,'. $user->id
+            'name' => 'required|string'
         ]);
     }
 }
