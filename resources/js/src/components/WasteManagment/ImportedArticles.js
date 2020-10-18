@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Button, Form, DatePicker, Select, Table, InputNumber } from "antd";
+import { Modal, Button, Form, DatePicker, Select, Table, InputNumber, Alert } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
@@ -33,10 +33,31 @@ const columns = [
 
 const ImportedArticles = props => {
     const [visible, setVisible] = useState(false);
+    const [form] = Form.useForm();
 
     const handleSubmit = values => {
         props.addImportedArticle(values);
+        setVisible(false);
     };
+
+    const handleCloseAlert = () => {
+        props.clearAlertMessage();
+    }
+
+    let alertMessage = null;
+
+    if (props.success) {
+        form.resetFields();
+        alertMessage = (
+            <Alert
+                closable
+                onClose={handleCloseAlert}
+                className="alert-message"
+                message="Article Added Successfully"
+                type="success"
+            />
+        );
+    }
 
     return (
         <div>
@@ -48,6 +69,7 @@ const ImportedArticles = props => {
             >
                 Add
             </Button>
+            {alertMessage}
             <Table
                 pagination={{ pageSize: 6 }}
                 columns={columns}
@@ -68,7 +90,7 @@ const ImportedArticles = props => {
                         closable
                     />
                 ) : null}
-                <Form onFinish={handleSubmit} layout="vertical">
+                <Form form={form} onFinish={handleSubmit} layout="vertical">
                     <Form.Item
                         label="Date"
                         name="date"

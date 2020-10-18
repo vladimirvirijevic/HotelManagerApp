@@ -70,6 +70,12 @@ export const getArticles = () => {
     };
 };
 
+export const clearArticleMessage = () => {
+    return {
+        type: actionTypes.CLEAR_ARTICLE_MESSAGE
+    };
+};
+
 // UNITS
 export const addUnitStart = () => {
     return {

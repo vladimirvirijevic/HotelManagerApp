@@ -4,5 +4,5 @@ export { addClient, getClients, clearClientsMessage } from "./clients";
 export { addService, getServices, clearServicesMessage } from "./services";
 export { addBooking, getBookings } from "./bookings";
 export { addDepartment, getDepartments, clearDepartmentsMessage } from "./departments";
-export { addArticle, getArticles, addUnit, getUnits, addImportedArticle, getImportedArticles, clearUnitsMessage } from "./articles";
-export { addTicket, getTickets, getTicketById, addTicketUpdate, clearTicketUpdateMessage } from "./tickets";
+export { addArticle, getArticles, addUnit, getUnits, addImportedArticle, getImportedArticles, clearUnitsMessage, clearArticleMessage } from "./articles";
+export { addTicket, getTickets, getTicketById, addTicketUpdate, clearTicketUpdateMessage, clearTicketMessage } from "./tickets";

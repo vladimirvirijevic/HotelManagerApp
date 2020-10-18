@@ -8,7 +8,8 @@ const initialState = {
     units: [],
     loadingUnits: false,
     errorUnits: null,
-    success: false
+    success: false,
+    articleSuccess: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,20 +17,23 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_ARTICLE_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                articleSuccess: false
             };
         case actionTypes.ADD_ARTICLE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                articles: state.articles.concat(action.article)
+                articles: state.articles.concat(action.article),
+                articleSuccess: true
             };
         case actionTypes.ADD_ARTICLE_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
+                articleSuccess: false
             };
         case actionTypes.GET_ARTICLES_START:
             return {
@@ -48,6 +52,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: action.error
+            };
+        case actionTypes.CLEAR_ARTICLE_MESSAGE:
+            return {
+                ...state,
+                loading: false,
+                errorUnits: null,
+                success: false,
+                articleSuccess: false
             };
 
             // UNITS
@@ -104,20 +116,23 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_IMPORTED_ARTICLE_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                articleSuccess: false
             };
         case actionTypes.ADD_IMPORTED_ARTICLE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                importedArticles: state.importedArticles.concat(action.importedArticle)
+                importedArticles: state.importedArticles.concat(action.importedArticle),
+                articleSuccess: true
             };
         case actionTypes.ADD_IMPORTED_ARTICLE_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
+                articleSuccess: false
             };
         case actionTypes.GET_IMPORTED_ARTICLES_START:
             return {
