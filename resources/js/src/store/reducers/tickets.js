@@ -5,7 +5,9 @@ const initialState = {
     loading: false,
     error: null,
     updateTicket: null,
-    ticketUpdates: []
+    ticketUpdates: [],
+    updateSuccess: false,
+    success: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,20 +15,23 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_TICKET_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                success: false
             };
         case actionTypes.ADD_TICKET_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                tickets: state.tickets.concat(action.ticket)
+                tickets: state.tickets.concat(action.ticket),
+                success: true
             };
         case actionTypes.ADD_TICKET_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
+                success: false
             };
         case actionTypes.GET_TICKETS_START:
             return {
@@ -64,24 +69,43 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.error
             };
+        case actionTypes.CLEAR_TICKET_MESSAGE:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                updateSuccess: false,
+                success: false
+            };
         //TICKET UPDATES
         case actionTypes.ADD_TICKET_UPDATE_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                success: false
             };
         case actionTypes.ADD_TICKET_UPDATE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                ticketUpdates: state.ticketUpdates.concat(action.ticketUpdate)
+                ticketUpdates: state.ticketUpdates.concat(action.ticketUpdate),
+                updateSuccess: true
             };
         case actionTypes.ADD_TICKET_UPDATE_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
+                updateSuccess: false
+            };
+        case actionTypes.CLEAR_TICKET_MESSAGE:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                updateSuccess: false,
+                success: false
             };
         default:
             return state;

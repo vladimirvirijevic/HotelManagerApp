@@ -12,16 +12,40 @@ const format = 'HH:mm';
 const UpdateTicket = props => {
     const params  = useParams();
     const [showErrorMessage, setShowErrorMessage] = useState(false);
-    let errorMessage = null;
+    const [form] = Form.useForm();
+
+    let alertMessage = null;
+
+    const handleCloseAlert = () => {
+        props.onClearAlertMessage();
+        setShowErrorMessage(false);
+    }
 
     if (showErrorMessage) {
-        errorMessage = (
+        alertMessage = (
             <Alert
+                closable
+                onClose={handleCloseAlert}
                 className="alert-message"
                 message="You must set time for at least one user"
                 type="error"
             />
         );
+    }
+    else if (props.success) {
+        alertMessage = (
+            <Alert
+                closable
+                onClose={handleCloseAlert}
+                className="alert-message"
+                message="Ticket updated successfully."
+                type="success"
+            />
+        );
+    }
+
+    if (props.success) {
+        form.resetFields();
     }
 
     useEffect(() => {
@@ -76,6 +100,7 @@ const UpdateTicket = props => {
             <Card title="Update ticket">
                 <div>
                     <Form 
+                        form={form}
                         initialValues={{ internalUpdate: "", description: "", service: props.ticket.serviceName}} 
                         onFinish={handleSubmit} 
                         layout="vertical">
@@ -197,7 +222,7 @@ const UpdateTicket = props => {
 
     return (
         <div>
-            {errorMessage}
+            {alertMessage}
             {updateTicket}
             {ticketUpdates}
         </div>
@@ -206,14 +231,16 @@ const UpdateTicket = props => {
 
 const mapStateToProps = state => {
     return {
-        ticket: state.tickets.updateTicket
+        ticket: state.tickets.updateTicket,
+        success: state.tickets.updateSuccess
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onGetTicket: (id) => dispatch(actions.getTicketById(id)),
-        onAddTicketUpdate: ticketUpdate => dispatch(actions.addTicketUpdate(ticketUpdate))
+        onAddTicketUpdate: ticketUpdate => dispatch(actions.addTicketUpdate(ticketUpdate)),
+        onClearAlertMessage: () => dispatch(actions.clearTicketMessage())
     };
 };
 

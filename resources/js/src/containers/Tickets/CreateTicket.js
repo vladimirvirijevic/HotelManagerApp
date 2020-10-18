@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Form, Input, Select, Card } from "antd";
+import React, { useEffect } from 'react'
+import { Button, Form, Input, Select, Card, Alert } from "antd";
 import { connect } from 'react-redux';
 import * as actions from "../../store/actions/index";
 
@@ -7,12 +7,42 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 const CreateTicket = props => {
+    const [form] = Form.useForm();
+
     useEffect(() => {
         props.onGetServices();
         props.onGetUsers();
     }, []);
 
-    const [internalText, setInternalText] = useState("");
+    let alertMessage = null;
+
+    const handleCloseAlert = () => {
+        props.onClearAlertMessage();
+    }
+
+    if (props.success) {
+        form.resetFields();
+        alertMessage = (
+            <Alert
+                closable
+                onClose={handleCloseAlert}
+                className="alert-message"
+                message="Ticket Added Successfully"
+                type="success"
+            />
+        );
+    }
+    else if (props.error) {
+        alertMessage = (
+            <Alert
+                closable
+                onClose={handleCloseAlert}
+                className="alert-message"
+                message={props.error}
+                type="error"
+            />
+        );
+    }
 
     const handleSubmit = (values) => {
         props.onAddTicket(values);
@@ -24,9 +54,11 @@ const CreateTicket = props => {
 
     return (
         <div>
+            {alertMessage}
             <Card title="Create ticket">
                 <div>
                     <Form 
+                        form={form}
                         initialValues={{ internalUpdate: "", description: ""}} 
                         onFinish={handleSubmit} 
                         layout="vertical">
@@ -141,7 +173,9 @@ const CreateTicket = props => {
 const mapStateToProps = state => {
     return {
         services: state.services.services,
-        users: state.auth.users
+        users: state.auth.users,
+        error: state.tickets.error,
+        success: state.tickets.success
     };
 };
 
@@ -149,7 +183,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetServices: () => dispatch(actions.getServices()),
         onGetUsers: () => dispatch(actions.getUsers()),
-        onAddTicket: ticket => dispatch(actions.addTicket(ticket))
+        onAddTicket: ticket => dispatch(actions.addTicket(ticket)),
+        onClearAlertMessage: () => dispatch(actions.clearTicketMessage())
     };
 };
 

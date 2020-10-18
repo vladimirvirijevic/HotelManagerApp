@@ -105,6 +105,12 @@ export const getTicketById = (id) => {
     };
 };
 
+export const clearTicketMessage = () => {
+    return {
+        type: actionTypes.CLEAR_TICKET_MESSAGE
+    };
+};
+
 // TICKET UPDATES
 export const addTicketUpdateStart = () => {
     return {
@@ -138,6 +144,12 @@ export const addTicketUpdate = ticketUpdate => {
             .catch(e => {
                 dispatch(addTicketFail(e.message));
             });
+    };
+};
+
+export const clearTicketUpdateMessage = () => {
+    return {
+        type: actionTypes.CLEAR_TICKET_UPDATE_MESSAGE
     };
 };
 

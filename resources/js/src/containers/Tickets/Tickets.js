@@ -73,7 +73,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetTickets: () => dispatch(actions.getTickets())
+        onGetTickets: () => dispatch(actions.getTickets()),
     };
 };
 
