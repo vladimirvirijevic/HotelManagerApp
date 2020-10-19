@@ -65,4 +65,21 @@ class RoomController extends Controller
             'price' => 'required'
         ]);
     }
+
+    public function delete($id) {
+        $room = Room::find($id);
+
+        if ($room == null) {
+            return response()->json(['Message' => 'Room does not exists!'], 404);
+        }
+
+        $user = Auth::user();
+        if ($room->user->id != $user->id) {
+            return response()->json(['Message' => 'Unauthorized!'], 401);
+        }
+
+        $room->delete();
+
+        return response()->json(['Message' => 'Room deleted successfuly!'], 200);
+    }
 }

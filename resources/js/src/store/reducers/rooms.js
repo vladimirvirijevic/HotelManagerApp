@@ -56,6 +56,19 @@ const reducer = (state = initialState, action) => {
                 error: null,
                 success: false
             };
+        case actionTypes.DELETE_ROOM_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                success: false,
+                rooms: state.rooms.filter(room => room.id != action.room.id)
+            };
+        case actionTypes.DELETE_ROOM_FAIL:
+            return {
+                ...state,
+                error: action.error,
+                success: false
+            };
         default:
             return state;
     }

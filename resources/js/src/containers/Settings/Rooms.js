@@ -41,9 +41,15 @@ const Rooms = props => {
 
     return (
         <div>
-            <RoomsCreate addRoom={props.onAddRoom} success={props.success} />
+            <RoomsCreate 
+                addRoom={props.onAddRoom} 
+                success={props.success} />
+
             {alertMessage}
-            <RoomsList rooms={props.rooms}/>
+
+            <RoomsList 
+                deleteRoom={props.onDeleteRoom} 
+                rooms={props.rooms}/>
         </div>
     );
 };
@@ -60,7 +66,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetRooms: () => dispatch(actions.getRooms()),
         onAddRoom: room => dispatch(actions.addRoom(room)),
-        onClearRoomMessage: () => dispatch(actions.clearRoomMessage())
+        onClearRoomMessage: () => dispatch(actions.clearRoomMessage()),
+        onDeleteRoom: (room) => dispatch(actions.deleteRoom(room))
     };
 };
 

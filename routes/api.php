@@ -19,6 +19,7 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'RoomController@index');
     Route::post('store', 'RoomController@store');
+    Route::delete('{id}', 'RoomController@delete');
 });
 
 Route::group([

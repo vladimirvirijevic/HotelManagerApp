@@ -77,3 +77,33 @@ export const clearRoomMessage = () => {
         type: actionTypes.CLEAR_ROOM_MESSAGE
     };
 };
+
+export const deleteRoomSuccess = (room) => {
+    return {
+        type: actionTypes.DELETE_ROOM_SUCCESS,
+        room: room
+    };
+};
+
+export const deleteRoomFail = (error) => {
+    return {
+        type: actionTypes.DELETE_ROOM_FAIL,
+        error: error
+    };
+};
+
+export const deleteRoom = (room) => {
+    console.log('test 4');
+    return dispatch => {
+        axios
+            .delete(`room/${room.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteRoomSuccess(room));
+            })
+            .catch(error => {
+                const errorMessage = "This room has been booked. Delete booking first!";
+                dispatch(deleteRoomFail(errorMessage));
+            });
+    }
+}
