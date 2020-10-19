@@ -1,15 +1,26 @@
 import React from 'react'
-import { Table } from "antd";
-
-const columns = [
-    {
-        title: "Name",
-        dataIndex: "name"
-    }
-];
+import { Table, Button } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
 
 const UnitsList = props => {
-    console.log('units list');
+    const columns = [
+        {
+            title: "Name",
+            dataIndex: "name"
+        },
+        {
+            title: 'Delete',
+            key: 'delete',
+            dataIndex: 'delete',
+            width: 100,
+            render: (text, record) => (
+             <Button icon={<CloseOutlined />} type="danger" onClick={()=> props.deleteUnit(record)}>
+               {"Delete"}
+             </Button>
+            ),
+        }
+    ];
+
     return (
         <Table
             pagination={{ pageSize: 6 }}

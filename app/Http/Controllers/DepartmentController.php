@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 Use App\Department;
+use App\ImportedArticle;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -61,5 +63,26 @@ class DepartmentController extends Controller
         return Validator::make(request()->all(), [
             'name' => 'required|unique:departments|string|max:100',
         ]);
+    }
+
+    public function delete($id) {
+        $department = Department::find($id);
+
+        if ($department == null) {
+            return response()->json(['Message' => 'Department does not exists!'], 404);
+        }
+
+        if(ImportedArticle::where('department_id', $department->id)->exists()) {
+            return response()->json(['Message' => 'Department is in use!'], 409);
+        }
+
+        $user = Auth::user();
+        if ($department->user->id != $user->id) {
+            return response()->json(['Message' => 'Unauthorized!'], 401);
+        }
+
+        $department->delete();
+
+        return response()->json(['Message' => 'Department deleted successfully!'], 200);
     }
 }

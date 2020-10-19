@@ -152,6 +152,35 @@ export const clearUnitsMessage = () => {
     };
 };
 
+export const deleteUnitSuccess = (unit) => {
+    return {
+        type: actionTypes.DELETE_UNIT_SUCCESS,
+        unit: unit
+    };
+};
+
+export const deleteUnitFail = (error) => {
+    return {
+        type: actionTypes.DELETE_UNIT_FAIL,
+        error: error
+    };
+};
+
+export const deleteUnit = (unit) => {
+    return dispatch => {
+        axios
+            .delete(`unit/${unit.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteUnitSuccess(unit));
+            })
+            .catch(error => {
+                const errorMessage = "This unit is in use!";
+                dispatch(deleteUnitFail(errorMessage));
+            });
+    }
+}
+
 
 // IMPORTED ARTICLE
 

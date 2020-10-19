@@ -58,6 +58,19 @@ const reducer = (state = initialState, action) => {
                 error: null,
                 success: false
             };
+        case actionTypes.DELETE_DEPARTMENT_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                success: false,
+                departments: state.departments.filter(department => department.id != action.department.id)
+            };
+        case actionTypes.DELETE_DEPARTMENT_FAIL:
+            return {
+                ...state,
+                error: action.error,
+                success: false
+            };
         default:
             return state;
     }

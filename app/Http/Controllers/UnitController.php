@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ImportedArticle;
 use App\Unit;
 
 use Illuminate\Http\JsonResponse;
@@ -57,5 +58,26 @@ class UnitController extends Controller
         return Validator::make(request()->all(), [
             'name' => 'required|string|unique:units,name,NULL,id,user_id,'. $user->id,
         ]);
+    }
+
+    public function delete($id) {
+        $unit = Unit::find($id);
+
+        if ($unit == null) {
+            return response()->json(['Message' => 'Unit does not exists!'], 404);
+        }
+
+        if(ImportedArticle::where('unit_id', $unit->id)->exists()) {
+            return response()->json(['Message' => 'Unit is in use!'], 409);
+        }
+
+        $user = Auth::user();
+        if ($unit->user->id != $user->id) {
+            return response()->json(['Message' => 'Unauthorized!'], 401);
+        }
+
+        $unit->delete();
+
+        return response()->json(['Message' => 'Unit deleted successfully!'], 200);
     }
 }

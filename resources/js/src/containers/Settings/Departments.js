@@ -43,7 +43,7 @@ const Departments = props => {
         <div>
             <DepartmentsCreate success={props.success} addDepartment={props.onAddDepartment} />
             {alertMessage}
-            <DepartmentsList departments={props.departments} />
+            <DepartmentsList deleteDepartment={props.onDeleteDepartment} departments={props.departments} />
         </div>
     );
 };
@@ -60,7 +60,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetDepartments: () => dispatch(actions.getDepartments()),
         onAddDepartment: department => dispatch(actions.addDepartment(department)),
-        onClearMessage: () => dispatch(actions.clearDepartmentsMessage())
+        onClearMessage: () => dispatch(actions.clearDepartmentsMessage()),
+        onDeleteDepartment: (department) => dispatch(actions.deleteDepartment(department))
     };
 };
 

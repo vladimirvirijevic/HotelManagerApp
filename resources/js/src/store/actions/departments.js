@@ -76,4 +76,33 @@ export const clearDepartmentsMessage = () => {
     };
 };
 
+export const deleteDepartmentSuccess = (department) => {
+    return {
+        type: actionTypes.DELETE_DEPARTMENT_SUCCESS,
+        department: department
+    };
+};
+
+export const deleteDepartmentFail = (error) => {
+    return {
+        type: actionTypes.DELETE_DEPARTMENT_FAIL,
+        error: error
+    };
+};
+
+export const deleteDepartment = (department) => {
+    return dispatch => {
+        axios
+            .delete(`department/${department.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteDepartmentSuccess(department));
+            })
+            .catch(error => {
+                const errorMessage = "This department is in use!";
+                dispatch(deleteDepartmentFail(errorMessage));
+            });
+    }
+}
+
 

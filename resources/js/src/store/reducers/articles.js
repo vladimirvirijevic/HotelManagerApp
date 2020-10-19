@@ -112,6 +112,19 @@ const reducer = (state = initialState, action) => {
                 errorUnits: null,
                 success: false
         };
+        case actionTypes.DELETE_UNIT_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                success: false,
+                units: state.units.filter(unit => unit.id != action.unit.id)
+            };
+        case actionTypes.DELETE_UNIT_FAIL:
+            return {
+                ...state,
+                errorUnits: action.error,
+                success: false
+            };
         // IMPORTED ARTICLES
         case actionTypes.ADD_IMPORTED_ARTICLE_START:
             return {

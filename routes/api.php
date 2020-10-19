@@ -54,6 +54,7 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'DepartmentController@index');
     Route::post('store', 'DepartmentController@store');
+    Route::delete('{id}', 'DepartmentController@delete');
 });
 
 Route::group([
@@ -70,6 +71,7 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'UnitController@index');
     Route::post('store', 'UnitController@store');
+    Route::delete('{id}', 'UnitController@delete');
 });
 
 Route::group([

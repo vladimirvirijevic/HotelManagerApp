@@ -43,7 +43,7 @@ const Units = props => {
         <div>
             <UnitsCreate addUnit={props.onAddUnit} success={props.success} />
             {alertMessage}
-            <UnitsList units={props.units} />
+            <UnitsList deleteUnit={props.onDeleteUnit} units={props.units} />
         </div>
     );
 };
@@ -60,7 +60,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetUnits: () => dispatch(actions.getUnits()),
         onAddUnit: unit => dispatch(actions.addUnit(unit)),
-        onClearMessage: () => dispatch(actions.clearUnitsMessage())
+        onClearMessage: () => dispatch(actions.clearUnitsMessage()),
+        onDeleteUnit: (unit) => dispatch(actions.deleteUnit(unit))
     };
 };
 
