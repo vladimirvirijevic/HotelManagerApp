@@ -75,3 +75,32 @@ export const clearClientsMessage = () => {
         type: actionTypes.CLEAR_CLIENTS_MESSAGE
     };
 };
+
+export const deleteClientSuccess = (client) => {
+    return {
+        type: actionTypes.DELETE_CLIENT_SUCCESS,
+        client: client
+    };
+};
+
+export const deleteClientFail = (error) => {
+    return {
+        type: actionTypes.DELETE_CLIENT_FAIL,
+        error: error
+    };
+};
+
+export const deleteClient = (client) => {
+    return dispatch => {
+        axios
+            .delete(`client/${client.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteClientSuccess(client));
+            })
+            .catch(error => {
+                const errorMessage = "This client is included in booking!";
+                dispatch(deleteClientFail(errorMessage));
+            });
+    }
+}

@@ -63,4 +63,21 @@ class ServiceController extends Controller
             'price' => 'required'
         ]);
     }
+
+    public function delete($id) {
+        $service = Service::find($id);
+
+        if ($service == null) {
+            return response()->json(['Message' => 'Service does not exists!'], 404);
+        }
+
+        $user = Auth::user();
+        if ($service->user->id != $user->id) {
+            return response()->json(['Message' => 'Unauthorized!'], 401);
+        }
+
+        $service->delete();
+
+        return response()->json(['Message' => 'Service deleted successfully!'], 200);
+    }
 }

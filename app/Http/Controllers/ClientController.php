@@ -67,4 +67,21 @@ class ClientController extends Controller
             'note' => 'required|string|max:255'
         ]);
     }
+
+    public function delete($id) {
+        $client = Client::find($id);
+
+        if ($client == null) {
+            return response()->json(['Message' => 'Client does not exists!'], 404);
+        }
+
+        $user = Auth::user();
+        if ($client->user->id != $user->id) {
+            return response()->json(['Message' => 'Unauthorized!'], 401);
+        }
+
+        $client->delete();
+
+        return response()->json(['Message' => 'Client deleted successfully!'], 200);
+    }
 }

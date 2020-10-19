@@ -93,7 +93,6 @@ export const deleteRoomFail = (error) => {
 };
 
 export const deleteRoom = (room) => {
-    console.log('test 4');
     return dispatch => {
         axios
             .delete(`room/${room.id}`)

@@ -75,3 +75,32 @@ export const clearServicesMessage = () => {
         type: actionTypes.CLEAR_SERVICES_MESSAGE
     };
 };
+
+export const deleteServiceSuccess = (service) => {
+    return {
+        type: actionTypes.DELETE_SERVICE_SUCCESS,
+        service: service
+    };
+};
+
+export const deleteServiceFail = (error) => {
+    return {
+        type: actionTypes.DELETE_SERVICE_FAIL,
+        error: error
+    };
+};
+
+export const deleteService = (service) => {
+    return dispatch => {
+        axios
+            .delete(`service/${service.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteServiceSuccess(service));
+            })
+            .catch(error => {
+                const errorMessage = "This service is in use!";
+                dispatch(deleteServiceFail(errorMessage));
+            });
+    }
+}

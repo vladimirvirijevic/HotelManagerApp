@@ -58,6 +58,19 @@ const reducer = (state = initialState, action) => {
                 error: null,
                 success: false
             };
+        case actionTypes.DELETE_CLIENT_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                success: false,
+                clients: state.clients.filter(client => client.id != action.client.id)
+            };
+        case actionTypes.DELETE_CLIENT_FAIL:
+            return {
+                ...state,
+                error: action.error,
+                success: false
+            };
         default:
             return state;
     }

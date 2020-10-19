@@ -43,7 +43,7 @@ const Clients = props => {
         <div>
             <ClientsCreate addClient={props.onAddClient} success={props.success} />
             {alertMessage}
-            <ClientsList clients={props.clients} />            
+            <ClientsList deleteClient={props.onDeleteClient} clients={props.clients} />            
         </div>
     );
 };
@@ -60,7 +60,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetClients: () => dispatch(actions.getClients()),
         onAddClient: client => dispatch(actions.addClient(client)),
-        onClearMessage: () => dispatch(actions.clearClientsMessage())
+        onClearMessage: () => dispatch(actions.clearClientsMessage()),
+        onDeleteClient: (client) => dispatch(actions.deleteClient(client))
     };
 };
 

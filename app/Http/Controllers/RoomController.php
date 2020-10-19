@@ -80,6 +80,6 @@ class RoomController extends Controller
 
         $room->delete();
 
-        return response()->json(['Message' => 'Room deleted successfuly!'], 200);
+        return response()->json(['Message' => 'Room deleted successfully!'], 200);
     }
 }

@@ -28,6 +28,7 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'ClientController@index');
     Route::post('store', 'ClientController@store');
+    Route::delete('{id}', 'ClientController@delete');
 });
 
 Route::group([
@@ -36,6 +37,7 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'ServiceController@index');
     Route::post('store', 'ServiceController@store');
+    Route::delete('{id}', 'ServiceController@delete');
 });
 
 Route::group([

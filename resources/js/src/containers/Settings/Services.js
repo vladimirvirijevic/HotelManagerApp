@@ -43,7 +43,7 @@ const Services = props => {
         <div>
             <ServicesCreate addService={props.onAddService} success={props.success} />
             {alertMessage}
-            <ServicesList services={props.services} />
+            <ServicesList deleteService={props.onDeleteService} services={props.services} />
         </div>
     );
 };
@@ -60,7 +60,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onGetServices: () => dispatch(actions.getServices()),
         onAddService: service => dispatch(actions.addService(service)),
-        onClearMessage: () => dispatch(actions.clearServicesMessage())
+        onClearMessage: () => dispatch(actions.clearServicesMessage()),
+        onDeleteService: (service) => dispatch(actions.deleteService(service))
     };
 };
 

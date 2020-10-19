@@ -1,7 +1,7 @@
 export { register, login, authCheckState, logout, getUsers } from "./auth";
 export { addRoom, getRooms, clearRoomMessage, deleteRoom } from "./rooms";
-export { addClient, getClients, clearClientsMessage } from "./clients";
-export { addService, getServices, clearServicesMessage } from "./services";
+export { addClient, getClients, clearClientsMessage, deleteClient } from "./clients";
+export { addService, getServices, clearServicesMessage, deleteService } from "./services";
 export { addBooking, getBookings } from "./bookings";
 export { addDepartment, getDepartments, clearDepartmentsMessage } from "./departments";
 export { addArticle, getArticles, addUnit, getUnits, addImportedArticle, getImportedArticles, clearUnitsMessage, clearArticleMessage } from "./articles";

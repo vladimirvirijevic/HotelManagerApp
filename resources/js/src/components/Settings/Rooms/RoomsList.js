@@ -20,6 +20,7 @@ const RoomsList = props => {
             title: 'Delete',
             key: 'key',
             dataIndex: 'key',
+            width: 100,
             render: (text, record) => (
              <Button icon={<CloseOutlined />} type="danger" onClick={()=> props.deleteRoom(record)}>
                {"Delete"}
