@@ -6,6 +6,7 @@ import Clients from './Clients';
 import Services from './Services';
 import Departments from './Departments';
 import Units from './Units';
+import Articles from './Articles';
 
 const Settings = props => {
     let { path, url } = useRouteMatch();
@@ -41,6 +42,11 @@ const Settings = props => {
                         Departments
                     </Link>
                 </Menu.Item>
+                <Menu.Item key="articles">
+                    <Link onClick={() => setActiveRoute("articles")} to={`${url}/articles`}>
+                        Articles
+                    </Link>
+                </Menu.Item>
                 <Menu.Item key="units">
                     <Link onClick={() => setActiveRoute("units")} to={`${url}/units`}>
                         Units
@@ -52,6 +58,7 @@ const Settings = props => {
                 <Route path={`${path}/clients`} component={Clients}/>
                 <Route path={`${path}/services`} component={Services}/>
                 <Route path={`${path}/departments`} component={Departments}/>
+                <Route path={`${path}/articles`} component={Articles}/>
                 <Route path={`${path}/units`} component={Units}/>
             </Switch>
         </div>

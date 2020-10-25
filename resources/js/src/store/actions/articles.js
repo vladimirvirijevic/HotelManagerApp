@@ -76,6 +76,36 @@ export const clearArticleMessage = () => {
     };
 };
 
+//
+export const deleteArticleSuccess = (article) => {
+    return {
+        type: actionTypes.DELETE_ARTICLE_SUCCESS,
+        article: article
+    };
+};
+
+export const deleteArticleFail = (error) => {
+    return {
+        type: actionTypes.DELETE_ARTICLE_FAIL,
+        error: error
+    };
+};
+
+export const deleteArticle = (article) => {
+    return dispatch => {
+        axios
+            .delete(`article/${article.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteArticleSuccess(article));
+            })
+            .catch(error => {
+                const errorMessage = "This article is in use!";
+                dispatch(deleteArticleFail(errorMessage));
+            });
+    }
+}
+
 // UNITS
 export const addUnitStart = () => {
     return {

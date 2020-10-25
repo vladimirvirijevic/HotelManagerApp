@@ -111,10 +111,7 @@ const BookingCalendar = props => {
     let uniqueKey = 'key';
 
     const onDateChange = (date, dateString) => {
-        const dateArr = dateString.split('/');
-
         labelDays = getLabelDays(date.toDate());
-        console.log('change day 19');
 
         const formatedDate = stringToDate(dateString, "dd/MM/yyyy","/");
         setLabelDays(getLabelDays(formatedDate));

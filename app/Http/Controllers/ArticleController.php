@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 
+use App\ImportedArticle;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -50,6 +51,27 @@ class ArticleController extends Controller
         }
 
         return response()->json(['message' => 'Error Occured', 'article' => null],400);
+    }
+
+    public function delete($id) {
+        $article = Article::find($id);
+
+        if ($article == null) {
+            return response()->json(['Message' => 'Article does not exists!'], 404);
+        }
+
+        if(ImportedArticle::where('article_id', $article->id)->exists()) {
+            return response()->json(['Message' => 'Article is in use!'], 409);
+        }
+
+        $user = Auth::user();
+        if ($article->user->id != $user->id) {
+            return response()->json(['Message' => 'Unauthorized!'], 401);
+        }
+
+        $article->delete();
+
+        return response()->json(['Message' => 'Article deleted successfully!'], 200);
     }
 
     public function validateArticle(){

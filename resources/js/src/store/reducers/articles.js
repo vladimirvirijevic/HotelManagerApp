@@ -58,8 +58,22 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 errorUnits: null,
+                error: null,
                 success: false,
                 articleSuccess: false
+            };
+        case actionTypes.DELETE_ARTICLE_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                success: false,
+                articles: state.articles.filter(article => article.id != action.article.id)
+            };
+        case actionTypes.DELETE_ARTICLE_FAIL:
+            return {
+                ...state,
+                error: action.error,
+                success: false
             };
 
             // UNITS

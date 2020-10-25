@@ -63,6 +63,7 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'ArticleController@index');
     Route::post('store', 'ArticleController@store');
+    Route::delete('{id}', 'ArticleController@delete');
 });
 
 Route::group([
