@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Department;
+use App\Exports\ImportedArticleExport;
+use App\Exports\ImportedArticleExportModel;
 use App\ImportedArticle;
+use App\Service;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Unit;
 use Illuminate\Http\JsonResponse;
@@ -62,6 +66,32 @@ class ImportedArticleController extends Controller
         }
 
         return response()->json(['message' => 'Error Occured', 'importedArticle' => null],400);
+    }
+
+    public function export(Request $request)
+    {
+        $articles = ImportedArticle::all();
+
+        $exportedArticles = [];
+
+        foreach ($articles as $article) {
+            $department = Department::find($article->department_id);
+            $articleImport = Article::find($article->article_id);
+            $unit = Unit::find($article->unit_id);
+
+            $importedArticleExport = new ImportedArticleExportModel();
+            $importedArticleExport->id = $article->id;
+            $importedArticleExport->department = $department->name;
+            $importedArticleExport->article = $articleImport->name;
+            $importedArticleExport->amount = $article->amount;
+            $importedArticleExport->unit = $unit->name;
+            $importedArticleExport->date = $article->date;
+            array_push($exportedArticles, $importedArticleExport);
+        }
+
+        $export = new ImportedArticleExport($exportedArticles);
+
+        return Excel::download($export, 'articles.xlsx');
     }
 
     public function validateImportedArticle(){

@@ -263,6 +263,20 @@ body {
 }
 // END SETTINGS
 
+// WASTE
+.export-button {
+    margin-left: 20px;
+    padding: 6px 20px;
+    background-color: #fff;
+    border: 1px solid rgb(107, 107, 107);
+    color: inherit;
+
+    &:hover {
+        color: inherit;
+    }
+}
+// END WASTE
+
 // CALENDAR
 .calendar {
     margin: 2rem 0;

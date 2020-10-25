@@ -61,6 +61,7 @@ const ImportedArticles = props => {
 
     return (
         <div>
+
             <Button
                 className="settings__add-button"
                 icon={<PlusOutlined />}
@@ -69,6 +70,7 @@ const ImportedArticles = props => {
             >
                 Add
             </Button>
+            <a className="export-button" href="//127.0.0.1:8000/api/importedArticle/export" target="_blank"><i class="fas fa-table"></i> Export as .xls</a>
             {alertMessage}
             <Table
                 pagination={{ pageSize: 6 }}

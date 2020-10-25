@@ -31173,6 +31173,18 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin-bottom: 20px;
 }
 
+.export-button {
+  margin-left: 20px;
+  padding: 6px 20px;
+  background-color: #fff;
+  border: 1px solid #6b6b6b;
+  color: inherit;
+}
+
+.export-button:hover {
+  color: inherit;
+}
+
 .calendar {
   margin: 2rem 0;
   font-size: 15px;

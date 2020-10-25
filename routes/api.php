@@ -81,6 +81,7 @@ Route::group([
 ], function ($router) {
     Route::get('all', 'ImportedArticleController@index');
     Route::post('store', 'ImportedArticleController@store');
+    Route::get('export', 'ImportedArticleController@export');
 });
 
 Route::group([
