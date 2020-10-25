@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Tooltip,
     Select,
     DatePicker
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import AddBooking from "./AddBooking";
+import moment from 'moment';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -13,10 +12,14 @@ const { RangePicker } = DatePicker;
 const dateFormat = "DD/MM/YYYY";
 
 const BookingCalendar = props => {
+    let [labelDaysState, setLabelDays] = useState([]);
+    
+    let startDate = moment();
 
     useEffect(() => {
         const now = new Date();
         labelDays = getLabelDays(now);
+        labelDaysState = setLabelDays(getLabelDays(new Date));
     }, []);
 
     const getLabelDays = (startDay) => {
@@ -35,6 +38,8 @@ const BookingCalendar = props => {
 
         return dates;
     }
+
+    
 
     const isBooked = (room, day) => {
         const roomBookings = props.bookings.filter(x => x.room.id == room.id);
@@ -105,15 +110,43 @@ const BookingCalendar = props => {
 
     let uniqueKey = 'key';
 
+    const onDateChange = (date, dateString) => {
+        const dateArr = dateString.split('/');
+
+        labelDays = getLabelDays(date.toDate());
+        console.log('change day 19');
+
+        const formatedDate = stringToDate(dateString, "dd/MM/yyyy","/");
+        setLabelDays(getLabelDays(formatedDate));
+    }
+
+    const stringToDate = (date, format, delimiter) => {
+        let formatLowerCase = format.toLowerCase();
+        let formatItems = formatLowerCase.split(delimiter);
+        let dateItems =date.split(delimiter);
+        let monthIndex = formatItems.indexOf("mm");
+        let dayIndex = formatItems.indexOf("dd");
+        let yearIndex = formatItems.indexOf("yyyy");
+        let month=parseInt(dateItems[monthIndex]);
+
+        month -= 1;
+
+        let formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+        return formatedDate;
+    }
+
     return (
         <div>
             <div className="calendar">
                 <div className="calendar-row">
                     <div className="calendar-field room-name">
-                        Choose Date Here
+                        <DatePicker 
+                            defaultValue={moment()} 
+                            format={dateFormat} 
+                            onChange={onDateChange} />
                     </div>
                     {
-                        labelDays.map(labelDay => {
+                        labelDaysState.map(labelDay => {
                             return <div className="calendar-field calendar-date-field" key={labelDay}>{ labelDay.split('-')[0] + '. ' + labelDay.split('-')[1]  + '.' }</div>  
                         })
                     }
@@ -127,7 +160,7 @@ const BookingCalendar = props => {
                                     { room.name }
                                 </div>
                                 {
-                                    labelDays.map((labelDay, i) => {
+                                    labelDaysState.map((labelDay, i) => {
                                         let field = "";
                                         if (isBooked(room, labelDay)) {
                                             const bookingId = isBooked(room, labelDay).split(' ')[1].split('-')[1];

@@ -72,7 +72,7 @@ class DepartmentController extends Controller
             return response()->json(['Message' => 'Department does not exists!'], 404);
         }
 
-        if(ImportedArticle::where('department_id', $department->id)->exists()) {
+        if (ImportedArticle::where('department_id', $department->id)->exists()) {
             return response()->json(['Message' => 'Department is in use!'], 409);
         }
 
