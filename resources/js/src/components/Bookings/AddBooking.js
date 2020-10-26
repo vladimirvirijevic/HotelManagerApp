@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Modal,
     Button,
@@ -17,10 +17,18 @@ const dateFormat = "DD/MM/YYYY";
 
 const AddBooking = props => {
     const [visible, setVisible] = useState(false);
+    const [form] = Form.useForm();
 
     const handleSubmit = values => {
         props.addBooking(values);
     };
+
+    useEffect(() => {
+        if (props.success) {
+            setVisible(false);
+            form.resetFields();
+        }
+    }, [props.success]);
 
     return (
         <div>
@@ -48,6 +56,7 @@ const AddBooking = props => {
                     />
                 ) : null}
                 <Form
+                    form={form}
                     initialValues={{
                         ["note"]: ""
                     }}

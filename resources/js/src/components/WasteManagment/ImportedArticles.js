@@ -70,7 +70,7 @@ const ImportedArticles = props => {
             >
                 Add
             </Button>
-            <a className="export-button" href="//127.0.0.1:8000/api/importedArticle/export" target="_blank"><i class="fas fa-table"></i> Export as .xls</a>
+            <a className="export-button" href="//app.hotel1pro.com/api/importedArticle/export" target="_blank"><i class="fas fa-table"></i> Export Excel</a>
             {alertMessage}
             <Table
                 pagination={{ pageSize: 6 }}

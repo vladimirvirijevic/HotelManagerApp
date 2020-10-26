@@ -14,7 +14,6 @@ const Bookings = props => {
         props.onGetBookings();
         props.onGetRooms();
         props.onGetClients();
-        
     }, []);
 
     const onAddBooking = bookingInfo => {
@@ -44,6 +43,7 @@ const Bookings = props => {
                         key="1"
                     >
                         <AddBooking
+                            success={props.success}
                             error={props.bookingError}
                             rooms={props.rooms}
                             clients={props.clients}
@@ -61,6 +61,7 @@ const Bookings = props => {
                         key="2"
                     >
                         <AddBooking
+                            success={props.success}
                             error={props.bookingError}
                             rooms={props.rooms}
                             clients={props.clients}
@@ -79,7 +80,8 @@ const mapStateToProps = state => {
         rooms: state.rooms.rooms,
         clients: state.clients.clients,
         bookings: state.bookings.bookings,
-        bookingError: state.bookings.error
+        bookingError: state.bookings.error,
+        success: state.bookings.success
     };
 };
 
