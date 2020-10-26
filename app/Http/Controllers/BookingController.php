@@ -85,7 +85,7 @@ class BookingController extends Controller
 
         $client->bookings()->attach($request->client);
         $room->bookings()->attach($request->room);
-        
+
         if($user->bookings()->save($booking)){
             $booking->client = $client;
             $booking->room = $room;
@@ -93,6 +93,21 @@ class BookingController extends Controller
         }
 
         return response()->json(['message'=>'Error Occured','booking'=>null],400);
+    }
+
+    public function delete($id) {
+        $loggedUser = Auth::user();
+
+        $booking = Booking::where('id', $id)
+                    ->where('user_id', $loggedUser->id)->first();
+
+        if ($booking == null) {
+            return response()->json(['Message' => 'Booking does not exists'], 404);
+        }
+
+        $booking->delete();
+
+        return response()->json(['Message' => 'Booking deleted successfully'], 200);
     }
 
     public function validateBooking() {

@@ -48,6 +48,19 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.error
             };
+        case actionTypes.DELETE_BOOKING_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                success: false,
+                bookings: state.bookings.filter(booking => booking.id != action.booking.id)
+            };
+        case actionTypes.DELETE_BOOKING_FAIL:
+            return {
+                ...state,
+                error: action.error,
+                success: false
+            };
         default:
             return state;
     }

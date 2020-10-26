@@ -68,3 +68,32 @@ export const getBookings = () => {
             });
     };
 };
+
+export const deleteBookingSuccess = (booking) => {
+    return {
+        type: actionTypes.DELETE_BOOKING_SUCCESS,
+        booking: booking
+    };
+};
+
+export const deleteBookingFail = (error) => {
+    return {
+        type: actionTypes.DELETE_BOOKING_FAIL,
+        error: error
+    };
+};
+
+export const deleteBooking = (booking) => {
+    return dispatch => {
+        axios
+            .delete(`booking/${booking.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteBookingSuccess(booking));
+            })
+            .catch(error => {
+                const errorMessage = "Cant delete booking!";
+                dispatch(deleteBookingFail(errorMessage));
+            });
+    }
+}

@@ -132,9 +132,8 @@ const BookingCalendar = props => {
         return formatedDate;
     }
 
-    return (
-        <div>
-            <div className="calendar">
+    let calendar = (
+        <div className="calendar">
                 <div className="calendar-row">
                     <div className="calendar-field room-name">
                         <DatePicker 
@@ -186,6 +185,15 @@ const BookingCalendar = props => {
                     })
                 }
             </div>
+    );
+
+    if (props.bookings.length == 0) {
+        calendar = "There are no bookings."
+    }
+
+    return (
+        <div>
+            {calendar}
         </div>
     );
 };

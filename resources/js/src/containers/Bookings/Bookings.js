@@ -67,7 +67,9 @@ const Bookings = props => {
                             clients={props.clients}
                             addBooking={onAddBooking}
                         />
-                        <BookingsList bookings={props.bookings} />
+                        <BookingsList 
+                            deleteBooking={props.onDeleteBooking}
+                            bookings={props.bookings} />
                     </TabPane>
                 </Tabs>
             </div>
@@ -90,7 +92,8 @@ const mapDispatchToProps = dispatch => {
         onGetRooms: () => dispatch(actions.getRooms()),
         onGetClients: () => dispatch(actions.getClients()),
         onAddBooking: bookings => dispatch(actions.addBooking(bookings)),
-        onGetBookings: () => dispatch(actions.getBookings())
+        onGetBookings: () => dispatch(actions.getBookings()),
+        onDeleteBooking: booking => dispatch(actions.deleteBooking(booking))
     };
 };
 
