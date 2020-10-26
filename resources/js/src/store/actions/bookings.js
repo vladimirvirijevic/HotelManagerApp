@@ -97,3 +97,33 @@ export const deleteBooking = (booking) => {
             });
     }
 }
+
+export const updateBookingSuccess = (booking) => {
+    return {
+        type: actionTypes.UPDATE_BOOKING_SUCCESS,
+        booking: booking
+    };
+};
+
+export const updateBookingFail = (error) => {
+    return {
+        type: actionTypes.UPDATE_BOOKING_FAIL,
+        error: error
+    };
+};
+
+export const updateBooking = (bookingId, status) => {
+    return dispatch => {
+        axios
+            .put(`booking/changeStatus/${bookingId}`, status)
+            .then(response => {
+                console.log(response)
+                dispatch(updateBookingSuccess(response.data.booking));
+            })
+            .catch(error => {
+                console.log(error);
+                const errorMessage = "Cant update booking!";
+                dispatch(updateBookingFail(errorMessage));
+            });
+    }
+}

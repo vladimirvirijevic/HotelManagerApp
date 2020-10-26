@@ -47,6 +47,7 @@ Route::group([
     Route::get('all', 'BookingController@index');
     Route::post('store', 'BookingController@store');
     Route::delete('{id}', 'BookingController@delete');
+    Route::put('changeStatus/{id}', 'BookingController@changeStatus');
 });
 
 Route::group([

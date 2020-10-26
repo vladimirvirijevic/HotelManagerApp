@@ -110,6 +110,23 @@ class BookingController extends Controller
         return response()->json(['Message' => 'Booking deleted successfully'], 200);
     }
 
+    public function changeStatus($id, Request $request) {
+        $loggedUser = Auth::user();
+
+        $booking = Booking::where('id', $id)
+            ->where('user_id', $loggedUser->id)->first();
+
+        if ($booking == null) {
+            return response()->json(['Message' => 'Booking does not exists'], 404);
+        }
+
+        //$booking->update(array('status' => $request->status));
+        $booking->status = $request->status;
+        $booking->save();
+
+        return response()->json(['Message' => 'Booking successfully updated', 'booking' => $booking], 200);
+    }
+
     public function validateBooking() {
         return Validator::make(request()->all(), [
             'startDate' => 'required|string|max:100',

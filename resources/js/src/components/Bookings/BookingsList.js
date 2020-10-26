@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table, Button } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined, EditOutlined } from "@ant-design/icons";
+import UpdateBooking from "./UpdateBooking";
 
 const BookingsList = (props) => {
+    const [visible, setVisible] = useState(false);
+    const [selectedBooking, setSelectedBooking] = useState(null);
+
+    const onUpdateBooking = booking => {
+        setVisible(true);
+        setSelectedBooking(booking);
+    }
+
     const columns = [
         {
             title: "Id",
@@ -29,6 +38,17 @@ const BookingsList = (props) => {
             dataIndex: "status"
         },
         {
+            title: 'Update',
+            key: 'update',
+            dataIndex: 'update',
+            width: 100,
+            render: (text, record) => (
+             <Button icon={<EditOutlined />} type="primary" onClick={() => onUpdateBooking(record)}>
+               {"Update"}
+             </Button>
+            ),
+        },
+        {
             title: 'Delete',
             key: 'delete',
             dataIndex: 'delete',
@@ -40,7 +60,7 @@ const BookingsList = (props) => {
             ),
         }
     ]; 
-    
+
     return <div>
         <Table
             pagination={{ pageSize: 6 }}
@@ -48,6 +68,11 @@ const BookingsList = (props) => {
             dataSource={props.bookings}
             rowKey="id"
         />
+        <UpdateBooking
+            updateBooking={props.updateBooking}
+            booking={selectedBooking}
+            visible={visible} 
+            onCancel={() => setVisible(false)}/>
     </div>
 };
 

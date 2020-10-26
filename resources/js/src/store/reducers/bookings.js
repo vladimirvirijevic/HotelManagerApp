@@ -61,6 +61,22 @@ const reducer = (state = initialState, action) => {
                 error: action.error,
                 success: false
             };
+        case actionTypes.UPDATE_BOOKING_SUCCESS:
+            const bookingIndex = state.bookings.findIndex(booking => booking.id == action.booking.id);
+            let updatedBookings = state.bookings;
+            updatedBookings[bookingIndex] = action.booking;
+
+            window.location.reload(false);
+
+            return {
+                ...state,
+                error: null,
+                bookings: updatedBookings
+            };
+        case actionTypes.UPDATE_BOOKING_FAIL:
+            return {
+                ...state
+            };
         default:
             return state;
     }
