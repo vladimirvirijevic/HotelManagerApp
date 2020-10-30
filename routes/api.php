@@ -84,6 +84,7 @@ Route::group([
     Route::get('all', 'ImportedArticleController@index');
     Route::post('store', 'ImportedArticleController@store');
     Route::get('export', 'ImportedArticleController@export');
+    Route::delete('{id}', 'ImportedArticleController@delete');
 });
 
 Route::group([

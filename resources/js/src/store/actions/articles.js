@@ -283,3 +283,32 @@ export const getImportedArticles = () => {
     };
 };
 
+export const deleteImportedArticleSuccess = (importedArticle) => {
+    return {
+        type: actionTypes.DELETE_IMPORTED_ARTICLE_SUCCESS,
+        importedArticle: importedArticle
+    };
+};
+
+export const deleteImportedArticleFail = (error) => {
+    return {
+        type: actionTypes.DELETE_IMPORTED_ARTICLE_FAIL,
+        error: error
+    };
+};
+
+export const deleteImportedArticle = (importedArticle) => {
+    return dispatch => {
+        axios
+            .delete(`importedArticle/${importedArticle.id}`)
+            .then(response => {
+                console.log(response)
+                dispatch(deleteImportedArticleSuccess(importedArticle));
+            })
+            .catch(error => {
+                const errorMessage = "Cant delete imported article";
+                dispatch(deleteImportedArticleFail(errorMessage));
+            });
+    }
+}
+

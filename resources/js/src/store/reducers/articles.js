@@ -179,6 +179,19 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.error
             };
+        case actionTypes.DELETE_IMPORTED_ARTICLE_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                success: false,
+                importedArticles: state.importedArticles.filter(importedArticle => importedArticle.id != action.importedArticle.id)
+            };
+        case actionTypes.DELETE_IMPORTED_ARTICLE_FAIL:
+            return {
+                ...state,
+                error: action.error,
+                success: false
+            };
         default:
             return state;
     }

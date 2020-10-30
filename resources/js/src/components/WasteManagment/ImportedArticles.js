@@ -1,37 +1,48 @@
 import React, { useState } from 'react'
 import { Modal, Button, Form, DatePicker, Select, Table, InputNumber, Alert } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
-const columns = [
-    {
-        title: "Id",
-        dataIndex: "id"
-    },
-    {
-        title: "Department",
-        dataIndex: ['department', 'name']
-    },
-    {
-        title: "Article",
-        dataIndex: ['article', 'name']
-    },
-    {
-        title: "Amount",
-        dataIndex: "amount"
-    },
-    {
-        title: "Unit",
-        dataIndex: ['unit', 'name']
-    },
-    {
-        title: "Date",
-        dataIndex: "date"
-    }
-];
-
 const ImportedArticles = props => {
+    const columns = [
+        {
+            title: "Id",
+            dataIndex: "id"
+        },
+        {
+            title: "Department",
+            dataIndex: ['department', 'name']
+        },
+        {
+            title: "Article",
+            dataIndex: ['article', 'name']
+        },
+        {
+            title: "Amount",
+            dataIndex: "amount"
+        },
+        {
+            title: "Unit",
+            dataIndex: ['unit', 'name']
+        },
+        {
+            title: "Date",
+            dataIndex: "date"
+        },
+        {
+            title: 'Delete',
+            key: 'key',
+            dataIndex: 'key',
+            width: 100,
+            render: (text, record) => (
+             <Button icon={<CloseOutlined />} type="danger" onClick={()=> props.deleteImportedArticle(record)}>
+               {"Delete"}
+             </Button>
+            ),
+        }
+    ];
+    
     const [visible, setVisible] = useState(false);
     const [form] = Form.useForm();
 
@@ -70,7 +81,7 @@ const ImportedArticles = props => {
             >
                 Add
             </Button>
-            <a className="export-button" href="//app.hotel1pro.com/api/importedArticle/export" target="_blank"><i class="fas fa-table"></i> Export Excel</a>
+            <a className="export-button" href="//127.0.0.1:8000/api/importedArticle/export" target="_blank"><i className="fas fa-table"></i> Export Excel</a>
             {alertMessage}
             <Table
                 pagination={{ pageSize: 6 }}

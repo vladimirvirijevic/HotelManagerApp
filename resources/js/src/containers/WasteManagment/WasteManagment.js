@@ -44,7 +44,8 @@ const WasteManagment = (props) => {
                         units={props.units} 
                         addImportedArticle={addImportedArticle}
                         success={props.success}
-                        clearAlertMessage={props.onClearAlertMessage}/>
+                        clearAlertMessage={props.onClearAlertMessage}
+                        deleteImportedArticle={props.onDeleteImportedArticle}/>
                 </TabPane>
                 <TabPane
                         tab={
@@ -77,7 +78,8 @@ const mapDispatchToProps = dispatch => {
         onGetUnits: () => dispatch(actions.getUnits()),
         onAddImportedArticle: importedArticle => dispatch(actions.addImportedArticle(importedArticle)),
         onGetImportedArticles: () => dispatch(actions.getImportedArticles()),
-        onClearAlertMessage: () => dispatch(actions.clearArticleMessage())
+        onClearAlertMessage: () => dispatch(actions.clearArticleMessage()),
+        onDeleteImportedArticle: importedArticle => dispatch(actions.deleteImportedArticle(importedArticle))
     };
 }
 

@@ -94,6 +94,24 @@ class ImportedArticleController extends Controller
         return Excel::download($export, 'articles.xlsx');
     }
 
+    public function delete($id) {
+        $importedArticle = ImportedArticle::find($id);
+
+        if ($importedArticle == null) {
+            return response()->json(['Message' => 'Imported Article does not exists!'], 404);
+        }
+
+        $user = Auth::user();
+
+        if ($importedArticle->user->id != $user->id) {
+            return response()->json(['Message' => 'Unauthorized!'], 401);
+        }
+
+        $importedArticle->delete();
+
+        return response()->json(['Message' => 'Imported Article deleted successfully!'], 200);
+    }
+
     public function validateImportedArticle(){
         return Validator::make(request()->all(), [
             'date' => 'required',
