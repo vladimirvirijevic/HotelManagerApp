@@ -51,11 +51,6 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: action.error
             };
-        case actionTypes.GET_TICKET_START:
-            return {
-                ...state,
-                loading: true
-            };
         case actionTypes.GET_TICKET_SUCCESS:
             return {
                 ...state,

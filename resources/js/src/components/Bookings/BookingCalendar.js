@@ -5,6 +5,7 @@ import {
     DatePicker
 } from "antd";
 import moment from 'moment';
+import Spinner from "../UI/Spinner";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -75,15 +76,20 @@ const BookingCalendar = props => {
         const fieldDate = new Date(day);
         fieldDate.setHours(0,0,0,0);
 
-        for (let i = 0; i < roomBookings.length; i++) {
-            const startDate = new Date(roomBookings[i].startDate.split("-").reverse().join("-"));
-            const endDate = new Date(roomBookings[i].endDate.split("-").reverse().join("-"));
+        if (roomBookings.length > 0) {
+            for (let i = 0; i < roomBookings.length; i++) {
+                const startDate = new Date(roomBookings[i].startDate.split("-").reverse().join("-"));
+                const endDate = new Date(roomBookings[i].endDate.split("-").reverse().join("-"));
+    
+                const bookedDates = getDates(startDate, endDate);
+                console.log(bookedDates.length);
 
-            const bookedDates = getDates(startDate, endDate);
-
-            for (let j = 0; j < bookedDates.length; j++) {
-                if (bookedDates[j].getTime() === fieldDate.getTime()) {
-                    return roomBookings[i];
+                if (bookedDates.length > 0) {
+                    for (let j = 0; j < bookedDates.length; j++) {
+                        if (bookedDates[j].getTime() === fieldDate.getTime()) {
+                            return roomBookings[i];
+                        }
+                    }
                 }
             }
         }
@@ -105,6 +111,8 @@ const BookingCalendar = props => {
 
         return dateArray;
     }
+
+    console.log('test 2');
 
     let labelDays = getLabelDays(new Date());
 
@@ -132,65 +140,68 @@ const BookingCalendar = props => {
         return formatedDate;
     }
 
-    let calendar = (
-        <div className="calendar">
-                <div className="calendar-row">
-                    <div className="calendar-field room-name">
-                        <DatePicker 
-                            defaultValue={moment()} 
-                            format={dateFormat} 
-                            onChange={onDateChange} />
+    let calendar = <Spinner />
+
+    if (!props.loading) {
+        calendar = (
+            <div className="calendar">
+                    <div className="calendar-row">
+                        <div className="calendar-field room-name">
+                            <DatePicker 
+                                defaultValue={moment()} 
+                                format={dateFormat} 
+                                onChange={onDateChange} />
+                        </div>
+                        {
+                            labelDaysState.map(labelDay => {
+                                return <div className="calendar-field calendar-date-field" key={labelDay}>{ labelDay.split('-')[0] + '. ' + labelDay.split('-')[1]  + '.' }</div>  
+                            })
+                        }
                     </div>
                     {
-                        labelDaysState.map(labelDay => {
-                            return <div className="calendar-field calendar-date-field" key={labelDay}>{ labelDay.split('-')[0] + '. ' + labelDay.split('-')[1]  + '.' }</div>  
+                        props.rooms.map((room, j) => {
+                            uniqueKey++;
+                            return (
+                                <div className="calendar-row">
+                                    <div key={"key" + uniqueKey} className="calendar-field room-name">
+                                        { room.name }
+                                    </div>
+                                    {
+                                        labelDaysState.map((labelDay, i) => {
+                                            let field = "";
+                                            if (isBooked(room, labelDay)) {
+                                                const bookingId = isBooked(room, labelDay).split(' ')[1].split('-')[1];
+                                                let bookingInfo = props.bookings.filter(b => b.id == bookingId)[0];
+                                                let tooltipText = () => {
+                                                    return (
+                                                      <>
+                                                         <p>Room: {bookingInfo.room.name}</p>
+                                                         <p>Client {bookingInfo.client.name}</p>
+                                                         <p>Total: {bookingInfo.price}</p>
+                                                         <p>Start Date: {bookingInfo.startDate}</p>
+                                                         <p>End Date: {bookingInfo.endDate}</p>
+                                                    </>
+                                                   )
+                                                }
+                                                field = <Tooltip arrowPointAtCenter className={"calendar-field can-book " + (isBooked(room, labelDay))} title={tooltipText}><div></div></Tooltip> 
+                                            }
+                                            else {
+                                                field = <div className={"calendar-field can-book "} key={i}></div> 
+                                            }
+                                            return field;
+                                        })
+                                    }
+                                </div>                
+                            )
                         })
                     }
                 </div>
-                {
-                    props.rooms.map((room, j) => {
-                        uniqueKey++;
-                        return (
-                            <div className="calendar-row">
-                                <div key={"key" + uniqueKey} className="calendar-field room-name">
-                                    { room.name }
-                                </div>
-                                {
-                                    labelDaysState.map((labelDay, i) => {
-                                        let field = "";
-                                        if (isBooked(room, labelDay)) {
-                                            const bookingId = isBooked(room, labelDay).split(' ')[1].split('-')[1];
-                                            let bookingInfo = props.bookings.filter(b => b.id == bookingId)[0];
-                                            let tooltipText = () => {
-                                                return (
-                                                  <>
-                                                     <p>Room: {bookingInfo.room.name}</p>
-                                                     <p>Client {bookingInfo.client.name}</p>
-                                                     <p>Total: {bookingInfo.price}</p>
-                                                     <p>Start Date: {bookingInfo.startDate}</p>
-                                                     <p>End Date: {bookingInfo.endDate}</p>
-                                                </>
-                                               )
-                                            }
-                                            field = <Tooltip arrowPointAtCenter className={"calendar-field can-book " + (isBooked(room, labelDay))} title={tooltipText}><div></div></Tooltip> 
-                                        }
-                                        else {
-                                            field = <div className={"calendar-field can-book "} key={i}></div> 
-                                        }
-                                        return field;
-                                    })
-                                }
-                            </div>                
-                        )
-                    })
-                }
-            </div>
-    );
+        );
+    }
 
     if (props.bookings.length == 0) {
         calendar = "There are no bookings."
     }
-
     return (
         <div>
             {calendar}

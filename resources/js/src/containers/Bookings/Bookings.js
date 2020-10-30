@@ -49,7 +49,10 @@ const Bookings = props => {
                             clients={props.clients}
                             addBooking={onAddBooking}
                         />
-                        <BookingCalendar rooms={props.rooms} bookings={props.bookings} />
+                        <BookingCalendar 
+                            rooms={props.rooms} 
+                            bookings={props.bookings} 
+                            loading={props.loading} />
                     </TabPane>
                     <TabPane
                         tab={
@@ -84,7 +87,8 @@ const mapStateToProps = state => {
         clients: state.clients.clients,
         bookings: state.bookings.bookings,
         bookingError: state.bookings.error,
-        success: state.bookings.success
+        success: state.bookings.success,
+        loading: state.bookings.loading
     };
 };
 
