@@ -69,7 +69,7 @@ class TicketController extends Controller
         $ticket->serviceName = $ticket->service->name;
         $ticket->contributors = $ticket->users;
 
-        $ticket->updates = $ticket->updates()->get();
+        $ticket->updates = $ticket->updates()->orderBy('id', 'DESC')->get();
 
         foreach ($ticket->updates as $update) {
             $update->timeEntries = TimeEntry::where('ticket_update_id', $update->id)->get();

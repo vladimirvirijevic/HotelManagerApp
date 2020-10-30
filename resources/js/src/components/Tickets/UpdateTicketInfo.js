@@ -23,11 +23,11 @@ const columns = [
 const UpdateTicketInfo = props => {
     return (
         <div class="ticket-update">
-            <Card title={props.update.name}>
+            <Card title={`Update Id: #${props.update.id} - ${props.update.name}`}>
                 <div className="ticket-update__info">
                     <div className="ticket-update__info-item">
                         <h4 className="ticket-update__subtitle">Date</h4>
-                        <p>{props.update.created_at}</p>
+                        <p>{props.update.created_at.substring(0, 10).split('-').reverse().join('. ') + '.'}</p>
                     </div>
                     <div className="ticket-update__info-item">
                         <h4 className="ticket-update__subtitle">Person</h4>

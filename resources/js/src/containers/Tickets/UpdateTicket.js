@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from "../../store/actions/index";
 import { Button, Form, Input, Tag, Card, TimePicker, Alert  } from "antd";
 import UpdateTicketInfo from '../../components/Tickets/UpdateTicketInfo';
+import OriginalTicketInfo from '../../components/Tickets/OriginalTicketInfo';
 
 const { RangePicker } = TimePicker;
 const { TextArea } = Input;
@@ -137,7 +138,7 @@ const UpdateTicket = props => {
                         </div>
 
                         <div className="update-ticket__tags">
-                            <p>Contributors</p>
+                            <p><b>Contributors</b></p>
                             {
                                 props.ticket.contributors.map(contributor => {
                                     return <Tag color="#5e5ec5" key={contributor.id}>{contributor.name}</Tag>
@@ -146,7 +147,7 @@ const UpdateTicket = props => {
                         </div>
 
                         <div className="update-ticket__time-worked">
-                            <p>Time Worked</p>
+                            <p><b>Time Worked</b></p>
                             {
                                 props.ticket.contributors.map(contributor => {
                                     return (
@@ -159,7 +160,6 @@ const UpdateTicket = props => {
                                                     format={format} 
                                                     className="update-ticket__rangepicker" />
                                             </Form.Item>
-                                            <p>Total Hours: 0</p>
                                         </div>
                                     );
                                 })
@@ -210,20 +210,23 @@ const UpdateTicket = props => {
     let ticketUpdates = null;
 
     if (props.ticket) {
+        let updateCount = 0;
         ticketUpdates = (
             props.ticket.updates.map(update => {
-                return <UpdateTicketInfo key={update.id} update={update}/>
+                ++updateCount;
+                return <UpdateTicketInfo 
+                    updateNumber={updateCount} 
+                    key={update.id} update={update}
+                    />
             })
         )
-        // ticketUpdates = (
-        //     <UpdateTicketInfo timeEntries={props.ticket.updates[0].timeEntries} />
-        // );
     }
 
     return (
         <div>
             {alertMessage}
             {updateTicket}
+            <OriginalTicketInfo ticket={props.ticket} />
             {ticketUpdates}
         </div>
     )
