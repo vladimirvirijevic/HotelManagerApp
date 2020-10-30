@@ -118,7 +118,8 @@ class ImportedArticleController extends Controller
             'amount' => 'required',
             'department_id' => 'required',
             'article_id' => 'required',
-            'unit_id' => 'required'
+            'unit_id' => 'required',
+            'type' => 'required'
         ]);
     }
 }

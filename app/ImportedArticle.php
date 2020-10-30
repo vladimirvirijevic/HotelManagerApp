@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ImportedArticle extends Model
 {
     protected $fillable = [
-        'name', 'article_id', 'department_id', 'unit_id', 'amount', 'date'
+        'name', 'article_id', 'department_id', 'unit_id', 'amount', 'date', 'type'
     ];
 
     public function user(){

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Tabs } from "antd";
-import ImportedArticles from '../../components/WasteManagment/ImportedArticles';
+import Articles from '../../components/WasteManagment/Articles';
 import { connect } from 'react-redux';
 import * as actions from "../../store/actions/index";
 
@@ -14,9 +14,10 @@ const WasteManagment = (props) => {
             amount: importedArticle.amount,
             department_id: importedArticle.department,
             article_id: importedArticle.article,
-            unit_id: importedArticle.unit
+            unit_id: importedArticle.unit,
+            type: importedArticle.type
         };
-
+        console.log(newImportedArticle);
         props.onAddImportedArticle(newImportedArticle);
     }
 
@@ -37,7 +38,7 @@ const WasteManagment = (props) => {
                             </span>
                         }
                         key="1">
-                    <ImportedArticles 
+                    <Articles 
                         articles={props.articles} 
                         importedArticles={props.importedArticles} 
                         departments={props.departments} 
@@ -45,7 +46,9 @@ const WasteManagment = (props) => {
                         addImportedArticle={addImportedArticle}
                         success={props.success}
                         clearAlertMessage={props.onClearAlertMessage}
-                        deleteImportedArticle={props.onDeleteImportedArticle}/>
+                        deleteImportedArticle={props.onDeleteImportedArticle}
+                        type="import"
+                        />
                 </TabPane>
                 <TabPane
                         tab={
@@ -54,7 +57,17 @@ const WasteManagment = (props) => {
                             </span>
                         }
                         key="2">
-                    Article Out
+                    <Articles 
+                        articles={props.articles} 
+                        importedArticles={props.importedArticles} 
+                        departments={props.departments} 
+                        units={props.units} 
+                        addImportedArticle={addImportedArticle}
+                        success={props.success}
+                        clearAlertMessage={props.onClearAlertMessage}
+                        deleteImportedArticle={props.onDeleteImportedArticle}
+                        type="export"
+                        />
                 </TabPane>
             </Tabs>
         </div>
