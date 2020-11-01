@@ -53,6 +53,14 @@ const Layout = props => {
                     </NavLink>
                     <NavLink
                         className="sidenav__item"
+                        to="/profile"
+                        activeClassName="active-link"
+                    >
+                        <i className="fas fa-user sidenav__icon"></i>{" "}
+                        <p className="sidenav__item__text">Profile</p>
+                    </NavLink>
+                    <NavLink
+                        className="sidenav__item"
                         to="/logout"
                         exact
                         activeClassName="active-link"

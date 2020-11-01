@@ -10,6 +10,7 @@ import Bookings from "./containers/Bookings/Bookings";
 import Settings from "./containers/Settings/Settings";
 import Logout from "./containers/Auth/Logout";
 import Tickets from "./containers/Tickets/Tickets";
+import Profile from "./containers/Profile/Profile";
 import CreateTicket from "./containers/Tickets/CreateTicket";
 import UpdateTicket from "./containers/Tickets/UpdateTicket";
 import WasteManagment from "./containers/WasteManagment/WasteManagment";
@@ -60,6 +61,11 @@ const App = props => {
                 <GuardedRoute
                     path="/settings"
                     component={Settings}
+                    auth={props.isAuth}
+                />
+                <GuardedRoute
+                    path="/profile"
+                    component={Profile}
                     auth={props.isAuth}
                 />
                 <GuardedRoute

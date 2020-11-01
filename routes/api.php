@@ -92,6 +92,8 @@ Route::group([
     'prefix' => 'user'
 ], function ($router) {
     Route::get('all', 'UserController@index');
+    Route::get('info', 'UserController@info');
+    Route::put('changeUsername/{id}', 'UserController@changeUsername');
 });
 
 Route::group([
